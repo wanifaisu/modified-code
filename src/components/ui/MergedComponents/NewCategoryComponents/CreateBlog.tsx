@@ -43,7 +43,7 @@ const CreateBlog = () => {
   const [editModal, setEditModal] = useState<Blog>(blogsData[0]);
   const editorRef = useRef(null);
   const [rows, setRows] = useState<RowData[]>([]);
-  const [formData, setFormData] = useState<RowData>({
+  const [formData, setFormData] = useState<any>({
     id: Math.random(),
     photo: null,
     name: "",
@@ -54,6 +54,7 @@ const CreateBlog = () => {
   });
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [blogsDataArr, setBlogsDataArr] = useState(blogsData);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
   const [previewImage, setPreviewImage] = useState<File | null>(null);
@@ -69,8 +70,10 @@ const CreateBlog = () => {
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
-      setFormData((prev) => ({ ...prev, icon: file }));
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prev: any) => ({ ...prev, thumbnail: fileUrl }));
     }
   };
   const handleIconClick = () => hiddenIconInput.current?.click();
@@ -96,6 +99,8 @@ const CreateBlog = () => {
   };
 
   const handleDeleteRow = (id: number): void => {
+    const filteredOrder = blogsDataArr.filter((_: any, i: number) => i !== id);
+    setBlogsDataArr(filteredOrder);
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
 
@@ -191,18 +196,21 @@ const CreateBlog = () => {
   };
 
   const handleSaveOrEdit = (): void => {
-    // Validate required fields
-    if (!formData.title || !formData.tag || !formData.photo) {
+    if (!formData.title || !formData.tag || !formData.thumbnail) {
       alert("Please fill in all required fields, including an image.");
       return;
     }
 
     if (editingRow !== null) {
+      setBlogsDataArr((prev) =>
+        prev.map((row, index) => (index === editingRow ? { ...formData } : row))
+      );
       // Update the row in edit mode
       setRows((prev) =>
         prev.map((row, index) => (index === editingRow ? { ...formData } : row))
       );
     } else {
+      setBlogsDataArr((prev) => [...prev, { ...formData, id: Math.random() }]);
       // Add a new row
       setRows((prev) => [...prev, { ...formData, id: Math.random() }]);
     }
@@ -212,7 +220,7 @@ const CreateBlog = () => {
 
   const handleEditRow = (index: number): void => {
     setEditingRow(index);
-    const row = rows[index];
+    const row = blogsDataArr[index];
     setFormData(row);
     handleOpenModal("Edit Blog");
   };
@@ -224,14 +232,13 @@ const CreateBlog = () => {
       )
     );
   };
-
   return (
     <div className="overflow-x-auto mt-[-3rem]">
-      <div className="p-3 rounded-md overflow-x-auto">
+      <div className="p-6 rounded-md overflow-x-auto">
         <span>Banner</span>
         <div className="flex flex-row justify-between items-center gap-4">
           {/* Upload Preview Area */}
-          <div className="flex flex-row justify-evenly items-center mb-8">
+          <div className="flex flex-row justify-evenly items-center mb-8 mt-2">
             <div
               className="relative flex items-center justify-center w-[89px] h-[65px] bg-white rounded cursor-pointer"
               onClick={!previewImage ? handleIconClick : undefined}
@@ -335,68 +342,74 @@ const CreateBlog = () => {
             </tr>
           </thead>
           <tbody>
-            {blogsData.map((row, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                } md:text-base text-sm`}
-              >
-                <td className="p-3 text-center">
-                  <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                    <span
-                      className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                    >
-                      {index + 1}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-3 border-l-[#D5D6EA] border-l-[0.79px]">
-                  <div className="flex justify-center">
-                    {row.thumbnail && (
-                      <Image
-                        src={row.thumbnail}
-                        width={100}
-                        height={50}
-                        alt="Blog Image"
-                        className="object-contain"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td
-                  className={`px-6 py-3 text-start border-l-[#D5D6EA] border-l-[0.79px] ${poppins.className} font-medium text-[15px] leading-[22.5px] text-[#000000]`}
+            {blogsDataArr && blogsDataArr?.length > 0 ? (
+              blogsDataArr.map((row, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
+                  } md:text-base text-sm`}
                 >
-                  {row.title}
-                </td>
-                <td
-                  className={`p-3 text-center ${poppins.className} border-l-[#D5D6EA] border-l-[0.79px] font-normal text-[15px] leading-[22.5px] text-[#000000]`}
-                >
-                  {row.tag}
-                </td>
-                <td
-                  className={`p-3 whitespace-nowrap ${poppins.className} border-l-[#D5D6EA] border-l-[0.79px] font-normal text-[15px] leading-[22.5px] text-[#000000]`}
-                >
-                  {row.dateUpload}
-                </td>
-                <td className="p-3 border-l-[#D5D6EA] border-l-[0.79px]">
-                  <div className="flex justify-center gap-2">
-                    <button onClick={handleReorder}>
-                      <TiArrowUnsorted color="yellow" />
-                    </button>
-                    <button onClick={() => handleToggleVisibility(index)}>
-                      <RxSwitch />
-                    </button>
-                    <button onClick={() => handleEditRow(index)}>
-                      <CiEdit color="green" />
-                    </button>
-                    <button onClick={() => handleDeleteRow(index)}>
-                      <BsTrash3 color="red" />
-                    </button>
-                  </div>
-                </td>
+                  <td className="p-3 text-center">
+                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                      <span
+                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
+                      >
+                        {index + 1}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="p-3 border-l-[#D5D6EA] border-l-[0.79px]">
+                    <div className="flex justify-center">
+                      {row.thumbnail && (
+                        <Image
+                          src={row.thumbnail}
+                          width={100}
+                          height={50}
+                          alt="Blog Image"
+                          className="object-contain h-10"
+                        />
+                      )}
+                    </div>
+                  </td>
+                  <td
+                    className={`px-6 py-3 text-start border-l-[#D5D6EA] border-l-[0.79px] ${poppins.className} font-medium text-[15px] leading-[22.5px] text-[#000000]`}
+                  >
+                    {row.title}
+                  </td>
+                  <td
+                    className={`p-3 text-center ${poppins.className} border-l-[#D5D6EA] border-l-[0.79px] font-normal text-[15px] leading-[22.5px] text-[#000000]`}
+                  >
+                    {row.tag}
+                  </td>
+                  <td
+                    className={`p-3 whitespace-nowrap ${poppins.className} border-l-[#D5D6EA] border-l-[0.79px] font-normal text-[15px] leading-[22.5px] text-[#000000]`}
+                  >
+                    {row.dateUpload}
+                  </td>
+                  <td className="p-3 border-l-[#D5D6EA] border-l-[0.79px]">
+                    <div className="flex justify-center gap-2">
+                      <button onClick={handleReorder}>
+                        <TiArrowUnsorted color="yellow" />
+                      </button>
+                      <button onClick={() => handleToggleVisibility(index)}>
+                        <RxSwitch />
+                      </button>
+                      <button onClick={() => handleEditRow(index)}>
+                        <CiEdit color="green" />
+                      </button>
+                      <button onClick={() => handleDeleteRow(index)}>
+                        <BsTrash3 color="red" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6}>No Data Found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -435,13 +448,22 @@ const CreateBlog = () => {
               />
               <div className="flex flex-row gap-3 ml-4">
                 <div className="relative w-[101px] h-20 bg-[#CCCCFF33] rounded shadow-xl">
-                  <Image
-                    src={editModal.thumbnail}
+                  {/* <Image
+                    src={formData.thumbnail}
                     width={62}
                     height={50}
                     alt="Preview"
                     className="object-cover mt-8 ml-3"
-                  />
+                  /> */}
+                  {formData?.thumbnail && (
+                    <Image
+                      src={formData?.thumbnail}
+                      width={50}
+                      height={56}
+                      alt="Preview"
+                      className="mt-2"
+                    />
+                  )}
                   <button
                     onClick={() => {}}
                     className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
@@ -467,7 +489,7 @@ const CreateBlog = () => {
                 <input
                   type="text"
                   className="rounded w-80 h-13 px-3 border border-[#000000]"
-                  value={editModal.title}
+                  value={formData.title}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, title: e.target.value }))
                   }
@@ -482,7 +504,7 @@ const CreateBlog = () => {
                 <input
                   type="text"
                   className="rounded w-80 h-13 px-3 border border-[#000000]"
-                  value={editModal.tag}
+                  value={formData.tag}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, tag: e.target.value }))
                   }
@@ -496,12 +518,17 @@ const CreateBlog = () => {
                 </label>
                 <JoditEditor
                   ref={editorRef}
-                  value={editModal.description}
+                  value={formData.description}
                   config={{
                     height: 150,
                   }}
-                  onBlur={(newContent) =>
-                    setEditModal({ ...editModal, description: newContent })
+                  onBlur={
+                    (newContent) =>
+                      setFormData((prev: any) => ({
+                        ...prev,
+                        description: newContent,
+                      }))
+                    // setEditModal({ ...editModal, description: newContent })
                   }
                 />
               </div>
