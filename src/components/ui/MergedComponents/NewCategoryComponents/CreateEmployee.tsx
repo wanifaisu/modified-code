@@ -342,9 +342,9 @@ const CreateEmployee: React.FC = () => {
                   #
                 </td>
                 <td className="p-3 text-center border-r border-black border-opacity-50">
-                  {formData.photo ? (
+                  {formData?.photo ? (
                     <Image
-                      src={formData.photo}
+                      src={formData?.photo}
                       alt="Uploaded Preview"
                       width={50}
                       height={50}
@@ -364,7 +364,7 @@ const CreateEmployee: React.FC = () => {
                 </td>
                 <td className="p-3 border-r border-black border-opacity-50">
                   <Input
-                    value={formData.name}
+                    value={formData?.name}
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, name: e.target.value }))
                     }
@@ -373,7 +373,7 @@ const CreateEmployee: React.FC = () => {
                 </td>
                 <td className="p-3 border-r border-black border-opacity-50">
                   <Input
-                    value={formData.title}
+                    value={formData?.title}
                     onChange={(e) =>
                       setFormData((prev) => ({
                         ...prev,
@@ -386,7 +386,7 @@ const CreateEmployee: React.FC = () => {
                 <td className="p-3 text-center border-r border-black border-opacity-50">
                   <div className="flex items-center gap-2">
                     <div className="flex items-center justify-center gap-2">
-                      {formData.socialLinks.map((link, index) => (
+                      {formData?.socialLinks?.map((link, index) => (
                         <div
                           key={index}
                           className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full"

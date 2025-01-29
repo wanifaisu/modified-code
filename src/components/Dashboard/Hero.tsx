@@ -474,7 +474,7 @@ const ECommerce: React.FC = () => {
           </div>
 
           {/* Line Chart */}
-          <div className="col-span-12 xl:col-span-8 px-4 mx-auto mt-8">
+          <div className="col-span-12 xl:col-span-8 px-4 mx-auto mt-8 ">
             <LineChart />
           </div>
 

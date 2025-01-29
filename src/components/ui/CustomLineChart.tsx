@@ -1,22 +1,13 @@
 "use client";
-import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
+import React, { useEffect, useRef } from "react";
 
 export const CustomLineChart: React.FC = () => {
   const chartRef = useRef<Chart | null>(null);
 
   useEffect(() => {
     const data = {
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-      ],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
       datasets: [
         {
           label: "Total Users",
@@ -122,13 +113,13 @@ export const CustomLineChart: React.FC = () => {
             beginAtZero: true,
             max: 30000,
             min: 0,
-            position: 'left' as const,
+            position: "left" as const,
             grid: {
               display: false,
             },
             ticks: {
-              callback: function(value: any) {
-                return (value/1000) + 'K';
+              callback: function (value: any) {
+                return value / 1000 + "K";
               },
               padding: 10,
               stepSize: 10000,
