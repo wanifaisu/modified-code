@@ -7,7 +7,7 @@ const poppins = Poppins({
   weight: ["500"],
 });
 interface buttonTitleProp {
-  title: string;
+  title?: string;
   onOpenModal: (title: string) => void;
 }
 const onStartDate = (value: string) => {
@@ -16,6 +16,7 @@ const onStartDate = (value: string) => {
 const onEndDate = (value: any) => {
   console.log(value);
 };
+
 const DateTimeSearch: React.FC<buttonTitleProp> = ({ title, onOpenModal }) => {
   return (
     <div>
@@ -39,7 +40,7 @@ const DateTimeSearch: React.FC<buttonTitleProp> = ({ title, onOpenModal }) => {
           />
         </div>
 
-        {title !== "Create Employee" && (
+        {title && title !== "Create Employee" && (
           <Button
             className={`bg-[#FFB200] h-[45px] px-3 ${poppins.className} font-medium text-base text-center text-[#000000] rounded-lg`}
             onClick={() => onOpenModal(title)}

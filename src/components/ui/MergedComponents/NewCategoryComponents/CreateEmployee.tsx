@@ -16,8 +16,6 @@ import { RxSwitch } from "react-icons/rx";
 import { TiArrowUnsorted } from "react-icons/ti";
 import DateTimeSearch from "./DateTimeSearch";
 
-import { IoMdCloseCircle } from "react-icons/io";
-
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -32,23 +30,31 @@ interface SocialLink {
 }
 
 interface RowData {
-  photo: string;
+  id: number;
+  photo?: string;
   name: string;
   title: string;
   socialLinks: SocialLink[];
   visible: boolean;
+  uploadDate?: any;
 }
 
 const CreateEmployee: React.FC = () => {
-  const [rows, setRows] = useState<RowData[]>([]);
-  const [formData, setFormData] = useState<RowData>({
+  const [rows, setRows] = useState<any>([]);
+  const [formData, setFormData] = useState<any>({
     photo: "",
     name: "",
     title: "",
     socialLinks: [],
     visible: true,
   });
-
+  const [editedData, setEditedData] = useState<any>({
+    photo: "",
+    name: "",
+    title: "",
+    socialLinks: [],
+    visible: true,
+  });
   const [socialInput, setSocialInput] = useState<SocialLink>({
     icon: <FaFacebook />,
     name: "Facebook",
@@ -58,7 +64,9 @@ const CreateEmployee: React.FC = () => {
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingRow, setEditingRow] = useState<number | null>(null);
+  const [editRow, setEditRow] = useState<any>({});
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+  const [employesData, setEmployesData] = useState<any>(employeeData);
   const [previewImage, setPreviewImage] = useState<File | null>(null);
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
   const hiddenIconInput = useRef<HTMLInputElement>(null);
@@ -73,7 +81,7 @@ const CreateEmployee: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFormData((prev) => ({ ...prev, icon: file }));
+      setFormData((prev: any) => ({ ...prev, icon: file }));
     }
   };
   const handleIconClick = () => hiddenIconInput.current?.click();
@@ -107,7 +115,7 @@ const CreateEmployee: React.FC = () => {
     setIsModalVisible(false);
     setFormData({
       id: Math.random(),
-      photo: null,
+      photo: "null",
       name: "",
       title: "",
       uploadDate: new Date().toISOString().split("T")[0],
@@ -118,19 +126,21 @@ const CreateEmployee: React.FC = () => {
 
   const handleSaveOrEdit = (): void => {
     // Validate required fields
-    if (!formData.title || !formData.photo) {
+    if (!formData?.title || !formData?.photo) {
       alert("Please fill in all required fields, including an image.");
       return;
     }
 
     if (editingRow !== null) {
       // Update the row in edit mode
-      setRows((prev) =>
-        prev.map((row, index) => (index === editingRow ? { ...formData } : row))
+      setRows((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
       );
     } else {
       // Add a new row
-      setRows((prev) => [...prev, { ...formData, id: Math.random() }]);
+      setRows((prev: any) => [...prev, { ...formData, id: Math.random() }]);
     }
 
     handleCloseModal();
@@ -138,13 +148,19 @@ const CreateEmployee: React.FC = () => {
 
   const handleEditRow = (index: number): void => {
     setEditingRow(index);
-    const row = rows[index];
+    const row = employesData[index];
+
+    setEditedData(row);
     setFormData(row);
     handleOpenModal("Edit Blog");
   };
 
   const handleDeleteRow = (id: number): void => {
-    setRows((prev) => prev.filter((row) => row.id !== id));
+    const filteredImages = employesData.filter((_: any, i: number) => i !== id);
+
+    // Update the state with the new filtered array
+    setEmployesData(filteredImages);
+    setRows((prev: any) => prev.filter((row: any) => row.id !== id));
   };
 
   const handleReorder = () => {
@@ -170,7 +186,7 @@ const CreateEmployee: React.FC = () => {
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({ ...prev, photo: fileUrl }));
+      setFormData((prev: any) => ({ ...prev, photo: fileUrl }));
     }
   };
 
@@ -179,7 +195,7 @@ const CreateEmployee: React.FC = () => {
       handleShowModal("Please provide a valid URL.");
       return;
     }
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       socialLinks: [...prev.socialLinks, socialInput],
     }));
@@ -192,18 +208,26 @@ const CreateEmployee: React.FC = () => {
   };
 
   const handleAddOrEditRow = (): void => {
-    if (!formData.name || !formData.title || !formData.photo) {
+    if (!formData?.name || !formData?.title || !formData?.photo) {
       handleShowModal("Please fill in all fields.");
       return;
     }
 
     if (editingRow !== null) {
-      setRows((prev) =>
-        prev.map((row, index) => (index === editingRow ? { ...formData } : row))
+      setRows((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
+      );
+      setEmployesData((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
       );
       setEditingRow(null);
     } else {
-      setRows((prev) => [...prev, { ...formData }]);
+      setEmployesData((prev: any) => [...prev, { ...formData }]);
+      setRows((prev: any) => [...prev, { ...formData }]);
     }
     setFormData({
       photo: "",
@@ -215,17 +239,16 @@ const CreateEmployee: React.FC = () => {
   };
 
   const handleToggleVisibility = (index: number): void => {
-    setRows((prev) =>
-      prev.map((row, i) =>
+    setRows((prev: any) =>
+      prev.map((row: any, i: number) =>
         i === index ? { ...row, visible: !row.visible } : row
       )
     );
   };
 
   const handleSortRows = (): void => {
-    setRows((prevRows) => [...prevRows].reverse());
+    setRows((prevRows: any) => [...prevRows].reverse());
   };
-
   return (
     <>
       <div className="p-4 mt-[-3rem]">
@@ -266,41 +289,10 @@ const CreateEmployee: React.FC = () => {
                   onChange={handleIconImageUpload}
                 />
               </div>
-
-              {/* Save Button */}
-              <Button
-                className={`w-[95px] h-12 bg-[#ffb200]  border border-[#FFB200] text-black rounded-lg px-4 ml-8`}
-                onClick={handleSaveIconImage}
-              >
-                Save
-              </Button>
-              <div
-                ref={scrollContainerRef}
-                className="flex items-center gap-2 overflow-x-hidden ml-12"
-                style={{ scrollBehavior: "smooth" }}
-              >
-                {uploadedImages.map((image, index) => (
-                  <div key={index} className="relative w-[50px] h-[65px]">
-                    <Image
-                      src={URL.createObjectURL(image)}
-                      alt={`Uploaded ${index}`}
-                      className="rounded object-cover mt-2"
-                      width={48.7}
-                      height={47.2}
-                    />
-                    <button
-                      onClick={() => handleDeleteIconImage(index)}
-                      className="absolute -top-3 -right-3 overflow-visible bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center"
-                    >
-                      <IoMdCloseCircle color="red" />
-                    </button>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
-          <DateTimeSearch title="Create Notice" onOpenModal={handleOpenModal} />
+          <DateTimeSearch onOpenModal={handleOpenModal} />
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-[#FFB200] text-black font-semibold">
@@ -366,7 +358,10 @@ const CreateEmployee: React.FC = () => {
                   <Input
                     value={formData?.name}
                     onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, name: e.target.value }))
+                      setFormData((prev: any) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
                     }
                     placeholder="Name"
                   />
@@ -375,7 +370,7 @@ const CreateEmployee: React.FC = () => {
                   <Input
                     value={formData?.title}
                     onChange={(e) =>
-                      setFormData((prev) => ({
+                      setFormData((prev: any) => ({
                         ...prev,
                         title: e.target.value,
                       }))
@@ -386,32 +381,34 @@ const CreateEmployee: React.FC = () => {
                 <td className="p-3 text-center border-r border-black border-opacity-50">
                   <div className="flex items-center gap-2">
                     <div className="flex items-center justify-center gap-2">
-                      {formData?.socialLinks?.map((link, index) => (
-                        <div
-                          key={index}
-                          className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full"
-                        >
-                          {link.icon}
-                        </div>
-                      ))}
+                      {formData?.socialLinks?.map(
+                        (link: any, index: number) => (
+                          <div
+                            key={index}
+                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full"
+                          >
+                            {link?.name && link?.icon}
+                          </div>
+                        )
+                      )}
                     </div>
                     <div className="flex items-center flex-1 gap-1 justify-center">
                       <Select
-                        value={socialInput.name}
+                        value={socialInput?.name}
                         onChange={(value) =>
                           setSocialInput((prev) => ({
                             ...prev,
                             name: value,
-                            icon: availableIcons.find((i) => i.name === value)
+                            icon: availableIcons?.find((i) => i?.name === value)
                               ?.icon!,
                           }))
                         }
                         placeholder="Select Icon"
                         className="rounded-md"
                       >
-                        {availableIcons.map((icon) => (
-                          <Option key={icon.name} value={icon.name}>
-                            {icon.name}
+                        {availableIcons?.map((icon) => (
+                          <Option key={icon.name} value={icon?.name}>
+                            {icon?.name}
                           </Option>
                         ))}
                       </Select>
@@ -435,7 +432,7 @@ const CreateEmployee: React.FC = () => {
                     </div>
                   </div>
                 </td>
-                <td className="p-3  flex flex-col justify-center items-center">
+                <td className="p-3 text-center border-r ">
                   <button
                     className="bg-orange-500 text-black text-center rounded-[5px] w-19 h-6"
                     onClick={handleAddOrEditRow}
@@ -444,90 +441,98 @@ const CreateEmployee: React.FC = () => {
                   </button>
                 </td>
               </tr>
-              {employeeData.map((row, index) => (
-                <tr
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? "bg-[#fff]" : "bg-[#FAEFD8]"
-                  } md:text-base text-sm`}
-                >
-                  <td className="p-3 border-r border-black border-opacity-50 text-center">
-                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                      <span
-                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                      >
-                        {index + 1}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="p-3 border-r border-black border-opacity-50 text-center">
-                    <Image
-                      src={"/images/user/user-01.png"}
-                      alt={row.name}
-                      width={50}
-                      height={50}
-                      className="rounded-md"
-                    />
-                  </td>
-                  <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[15px] leading-[22.5px] text-[#000000]`}
+              {employesData && employesData?.length > 0 ? (
+                employesData?.map((row: any, index: any) => (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-[#fff]" : "bg-[#FAEFD8]"
+                    } md:text-base text-sm`}
                   >
-                    {row.name}
-                  </td>
-                  <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[15px] leading-[22.5px] text-[#000000]`}
-                  >
-                    {row.title}
-                  </td>
-                  <td className="p-3 text-center border-r border-black border-opacity-50">
-                    <div className="flex items-center justify-center gap-2">
-                      {row.socialLinks.map((link, i) => (
-                        <div
-                          key={i}
-                          className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full"
+                    <td className="p-3 border-r border-black border-opacity-50 text-center">
+                      <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                        <span
+                          className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
                         >
-                          {link.icon === "facebool" ? (
-                            <FaFacebook color="#FFB200" />
-                          ) : link.icon === "instagram" ? (
-                            <FaInstagram color="#FFB200" />
-                          ) : link.icon === "twitter" ? (
-                            <FaTwitter color="#FFB200" />
-                          ) : (
-                            <FaLinkedin color="#FFB200" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </td>
-                  <td className="p-3 text-center">
-                    <div className="flex gap-2 justify-center">
-                      <Button>
-                        <TiArrowUnsorted onClick={() => handleSortRows()} />
-                      </Button>
-                      <Button onClick={() => handleToggleVisibility(index)}>
-                        <RxSwitch />
-                      </Button>
-                      <Button onClick={() => handleEditRow(index)}>
-                        <CiEdit />
-                      </Button>
-                      <Button onClick={() => handleDeleteRow(index)}>
-                        <BsTrash3 color="red" />
-                      </Button>
-                    </div>
-                  </td>
+                          {index + 1}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-3 border-r border-black border-opacity-50 text-center">
+                      <Image
+                        src={"/images/user/user-01.png"}
+                        alt={row.name}
+                        width={50}
+                        height={50}
+                        className="rounded-md"
+                      />
+                    </td>
+                    <td
+                      className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[15px] leading-[22.5px] text-[#000000]`}
+                    >
+                      {row.name}
+                    </td>
+                    <td
+                      className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[15px] leading-[22.5px] text-[#000000]`}
+                    >
+                      {row.title}
+                    </td>
+                    <td className="p-3 text-center border-r border-black border-opacity-50">
+                      <div className="flex items-center justify-center gap-2">
+                        {row?.socialLinks.map((link: any, i: any) => (
+                          <div
+                            key={i}
+                            className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full"
+                          >
+                            {link.icon === "facebool" ? (
+                              <FaFacebook color="#FFB200" />
+                            ) : link.icon === "instagram" ? (
+                              <FaInstagram color="#FFB200" />
+                            ) : link.icon === "twitter" ? (
+                              <FaTwitter color="#FFB200" />
+                            ) : (
+                              <FaLinkedin color="#FFB200" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="p-3 text-center">
+                      <div className="flex gap-2 justify-center">
+                        <Button>
+                          <TiArrowUnsorted onClick={() => handleSortRows()} />
+                        </Button>
+                        <Button onClick={() => handleToggleVisibility(index)}>
+                          <RxSwitch />
+                        </Button>
+                        <Button onClick={() => handleEditRow(index)}>
+                          <CiEdit />
+                        </Button>
+                        <Button onClick={() => handleDeleteRow(index)}>
+                          <BsTrash3 color="red" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6}>No Data Fount</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
-        <div className="flex flex-col w-full items-center justify-center my-7 gap-5">
-          <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
-            Showing 1 to 5 of 97 results
-          </p>
-          <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
-            More Results
+        {employesData?.length > 0 && (
+          <div className="flex flex-col w-full items-center justify-center my-7 gap-5">
+            <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
+              Showing 1 to 5 of 97 results
+            </p>
+            <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
+              More Results
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

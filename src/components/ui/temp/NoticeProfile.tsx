@@ -1,12 +1,8 @@
-import React, { useState, useRef } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
-import { RiDeleteBin6Line, RiDragDropFill } from "react-icons/ri";
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { MdCloudUpload } from "react-icons/md";
-import { RxFileText } from "react-icons/rx";
-import { IoAddCircle } from "react-icons/io5";
-import { ProfilesData } from "../MergedComponents/CreateCompanyPolicy";
 import Image from "next/image";
+import React, { useRef, useState } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { MdCloudUpload } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
 // interface Props{
 //     Pdata:ProfilesData[];
 //     setcompanyProfiles: React.Dispatch<React.SetStateAction<ProfilesData[]>>;

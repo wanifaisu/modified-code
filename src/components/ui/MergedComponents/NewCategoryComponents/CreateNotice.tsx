@@ -18,7 +18,7 @@ const poppins = Poppins({
 const { Option } = Select;
 
 interface Notice {
-  title: string;
+  title?: string;
   updatedDate: string;
   status: string;
   documents: string[];
@@ -36,10 +36,14 @@ const CreateNotice: React.FC = () => {
   });
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editModal, setEditModal] = useState<any>(null);
   const [editingRow, setEditingRow] = useState<number | null>(null);
+  const [modalTitle, setModalTitle] = useState<any>("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
   const [previewImage, setPreviewImage] = useState<File | null>(null);
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+  const [formData, setFormData] = useState<any>([]);
+  const [rows, setRows] = useState<any>({});
   const hiddenIconInput = useRef<HTMLInputElement>(null);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -52,7 +56,7 @@ const CreateNotice: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFormData((prev) => ({ ...prev, icon: file }));
+      setFormData((prev: any) => ({ ...prev, icon: file }));
     }
   };
 
@@ -119,12 +123,14 @@ const CreateNotice: React.FC = () => {
 
     if (editingRow !== null) {
       // Update the row in edit mode
-      setRows((prev) =>
-        prev.map((row, index) => (index === editingRow ? { ...formData } : row))
+      setRows((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
       );
     } else {
       // Add a new row
-      setRows((prev) => [...prev, { ...formData, id: Math.random() }]);
+      setRows((prev: any) => [...prev, { ...formData, id: Math.random() }]);
     }
 
     handleCloseModal();
@@ -132,17 +138,17 @@ const CreateNotice: React.FC = () => {
 
   const handleEditRow = (index: number): void => {
     setEditingRow(index);
-    setEditModal(templatesDataArray[index]);
+    // setEditModal(templatesDataArray[index]);
     handleOpenModal("Edit Blog");
   };
 
   const handleDeleteRow = (id: number): void => {
-    setRows((prev) => prev.filter((_, index) => index !== id));
+    setRows((prev: any) => prev.filter((_: any, index: any) => index !== id));
   };
 
   const handleToggleVisibility = (index: number): void => {
-    setRows((prev) =>
-      prev.map((row, i) =>
+    setRows((prev: any) =>
+      prev.map((row: any, i: any) =>
         i === index ? { ...row, visible: !row.visible } : row
       )
     );
@@ -277,7 +283,7 @@ const CreateNotice: React.FC = () => {
             </div>
           </div>
 
-          <DateTimeSearch title="Create Notice" onOpenModal={handleOpenModal} />
+          <DateTimeSearch onOpenModal={handleOpenModal} />
           <table className="w-full text-center border-collapse">
             <thead>
               <tr className="bg-[#FFB200] text-black font-semibold">
@@ -442,7 +448,7 @@ const CreateNotice: React.FC = () => {
                   </td>
                   <td className="p-3 border-r border-black border-opacity-50">
                     <div className="flex justify-center gap-2">
-                      {notice.documents.map((doc, i) => (
+                      {notice.documents.map((doc: any, i) => (
                         <FaRegFilePdf color="red" size={33} key={doc?.id} />
                       ))}
                     </div>

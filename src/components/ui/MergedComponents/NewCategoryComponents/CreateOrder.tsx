@@ -19,7 +19,7 @@ const poppins = Poppins({
 
 interface RowData {
   id: number;
-  photo: File | null;
+  images: File | null;
   name: string;
   title: string;
   uploadDate: string;
@@ -28,9 +28,9 @@ interface RowData {
 
 const CreateOrder = () => {
   const [rows, setRows] = useState<RowData[]>([]);
-  const [formData, setFormData] = useState<RowData>({
+  const [formData, setFormData] = useState<any>({
     id: Math.random(),
-    photo: null,
+    images: null,
     name: "",
     title: "",
     uploadDate: new Date().toISOString().split("T")[0],
@@ -42,6 +42,7 @@ const CreateOrder = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
   const [previewImage, setPreviewImage] = useState<File | null>(null);
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+  const [orderDataArr, setOrderDataArr] = useState<any>(templatesDataArray);
   const hiddenIconInput = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -54,11 +55,11 @@ const CreateOrder = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFormData((prev) => ({ ...prev, icon: file }));
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prev: any) => ({ ...prev, images: fileUrl }));
     }
   };
   const handleIconClick = () => hiddenIconInput.current?.click();
-
   const handleIconImageUpload = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -88,7 +89,7 @@ const CreateOrder = () => {
     setIsModalVisible(false);
     setFormData({
       id: Math.random(),
-      photo: null,
+      images: null,
       name: "",
       title: "",
       uploadDate: new Date().toISOString().split("T")[0],
@@ -99,18 +100,27 @@ const CreateOrder = () => {
 
   const handleSaveOrEdit = (): void => {
     // Validate required fields
-    if (!formData.title || !formData.photo) {
+    if (!formData.title || !formData?.images) {
       alert("Please fill in all required fields, including an image.");
       return;
     }
 
     if (editingRow !== null) {
+      setOrderDataArr((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
+      );
       // Update the row in edit mode
       setRows((prev) =>
         prev.map((row, index) => (index === editingRow ? { ...formData } : row))
       );
     } else {
       // Add a new row
+      setOrderDataArr((prev: any) => [
+        ...prev,
+        { ...formData, id: Math.random() },
+      ]);
       setRows((prev) => [...prev, { ...formData, id: Math.random() }]);
     }
 
@@ -119,12 +129,14 @@ const CreateOrder = () => {
 
   const handleEditRow = (index: number): void => {
     setEditingRow(index);
-    const row = rows[index];
+    const row = orderDataArr[index];
     setFormData(row);
     handleOpenModal("Edit Blog");
   };
 
   const handleDeleteRow = (id: number): void => {
+    const filteredOrder = orderDataArr.filter((_: any, i: number) => i !== id);
+    setOrderDataArr(filteredOrder);
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
 
@@ -147,7 +159,6 @@ const CreateOrder = () => {
     }
     setRows(sortedRows);
   };
-
   return (
     <>
       <div className="overflow-x-auto mt-[-3rem]">
@@ -163,7 +174,7 @@ const CreateOrder = () => {
                 {previewImage ? (
                   <>
                     <Image
-                      src={URL.createObjectURL(previewImage)}
+                      src={URL?.createObjectURL(previewImage)}
                       alt="Preview"
                       className="rounded-lg object-cover"
                       width={47}
@@ -222,7 +233,7 @@ const CreateOrder = () => {
             </div>
           </div>
 
-          <DateTimeSearch title="Create Notice" onOpenModal={handleOpenModal} />
+          <DateTimeSearch title="Create Order" onOpenModal={handleOpenModal} />
           <table className="w-full text-center border-collapse">
             <thead>
               <tr className="bg-[#FFB200] text-black font-semibold">
@@ -254,63 +265,69 @@ const CreateOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {templatesDataArray.map((row, index) => (
-                <tr
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                  } md:text-base text-sm`}
-                >
-                  <td className="p-3 text-center border-r border-black border-opacity-50">
-                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                      <span
-                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                      >
-                        {index + 1}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="p-3 border-r border-black border-opacity-50">
-                    <div className="flex justify-center">
-                      {row.images && (
-                        <Image
-                          src={row.images}
-                          width={100}
-                          height={50}
-                          alt="Blog Image"
-                          className="object-contain"
-                        />
-                      )}
-                    </div>
-                  </td>
-                  <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+              {orderDataArr && orderDataArr?.length > 0 ? (
+                orderDataArr?.map((row: any, index: any) => (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
+                    } md:text-base text-sm`}
                   >
-                    {row.visible ? row.title : "*****"}
-                  </td>
-                  <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                  >
-                    {row.uploadDate}
-                  </td>
-                  <td className="p-3">
-                    <div className="flex justify-center gap-2">
-                      <button onClick={handleReorder}>
-                        <TiArrowUnsorted color="yellow" />
-                      </button>
-                      <button onClick={() => handleToggleVisibility(index)}>
-                        <RxSwitch />
-                      </button>
-                      <button onClick={() => handleEditRow(index)}>
-                        <CiEdit color="green" />
-                      </button>
-                      <button onClick={() => handleDeleteRow(index)}>
-                        <BsTrash3 color="red" />
-                      </button>
-                    </div>
-                  </td>
+                    <td className="p-3 text-center border-r border-black border-opacity-50">
+                      <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                        <span
+                          className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
+                        >
+                          {index + 1}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-3 border-r border-black border-opacity-50">
+                      <div className="flex justify-center">
+                        {row?.images && (
+                          <Image
+                            src={row?.images}
+                            width={100}
+                            height={50}
+                            alt="Blog Image"
+                            className="object-contain h-10"
+                          />
+                        )}
+                      </div>
+                    </td>
+                    <td
+                      className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+                    >
+                      {row.visible ? row.title : "*****"}
+                    </td>
+                    <td
+                      className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                    >
+                      {row.uploadDate}
+                    </td>
+                    <td className="p-3">
+                      <div className="flex justify-center gap-2">
+                        <button onClick={handleReorder}>
+                          <TiArrowUnsorted color="yellow" />
+                        </button>
+                        <button onClick={() => handleToggleVisibility(index)}>
+                          <RxSwitch />
+                        </button>
+                        <button onClick={() => handleEditRow(index)}>
+                          <CiEdit color="green" />
+                        </button>
+                        <button onClick={() => handleDeleteRow(index)}>
+                          <BsTrash3 color="red" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr className={`${"bg-[#fff]"} md:text-base text-sm h-20`}>
+                  <td colSpan={6}>No Data Found</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -342,9 +359,9 @@ const CreateOrder = () => {
                     ref={hiddenFileInput}
                   />
                   <div className="relative flex w-20 h-15 flex-row justify-start ml-4 shadow-[4px_4px_10px_0] shadow-[#00000040]">
-                    {formData.photo && (
+                    {formData?.images && (
                       <Image
-                        src={URL.createObjectURL(formData.photo)}
+                        src={formData?.images}
                         width={50}
                         height={56}
                         alt="Preview"
@@ -375,10 +392,10 @@ const CreateOrder = () => {
                   </label>
                   <input
                     type="text"
-                    className="rounded-[5px] w-full h-14 border border-[#000000]"
+                    className="pl-3 rounded-[5px] w-full h-14 border border-[#000000]"
                     value={formData.title}
                     onChange={(e) =>
-                      setFormData((prev) => ({
+                      setFormData((prev: any) => ({
                         ...prev,
                         title: e.target.value,
                       }))
@@ -390,14 +407,16 @@ const CreateOrder = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full items-center justify-center my-7 gap-5">
-        <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
-          Showing 1 to 5 of 97 results
-        </p>
-        <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
-          More Results
+      {orderDataArr && orderDataArr?.length > 0 && (
+        <div className="flex flex-col w-full items-center justify-center my-7 gap-5">
+          <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
+            Showing 1 to 5 of 97 results
+          </p>
+          <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
+            More Results
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

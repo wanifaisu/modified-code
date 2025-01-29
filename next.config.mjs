@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", //that's allow all domain support
+        hostname: "example.com", //that's allow all domain support
       },
     ],
   },

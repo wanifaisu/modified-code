@@ -1,7 +1,6 @@
 "use client";
 
 import { FieldConfig, useField } from "formik";
-import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
 
 type Props = React.ClassAttributes<HTMLInputElement> &
@@ -9,7 +8,7 @@ type Props = React.ClassAttributes<HTMLInputElement> &
   FieldConfig<any> & {
     label: string;
     classname?: string;
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
     placeholder: string;
   };
 
@@ -31,9 +30,7 @@ function TextInput({
   return (
     <div>
       <div className="relative">
-        <span className="absolute left-6 top-1/2 -translate-y-1/2">
-          {icon}
-        </span>
+        <span className="absolute left-6 top-1/2 -translate-y-1/2">{icon}</span>
         <input
           id={label}
           type={type === "password" && visibility ? "text" : type}
