@@ -127,52 +127,12 @@ const CreateBlog = () => {
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({ ...prev, photo: fileUrl }));
+      setFormData((prev: any) => ({ ...prev, photo: fileUrl }));
     }
   };
-
-  const handleAddSocialLink = (): void => {
-    if (!socialInput.url) {
-      handleShowModal("Please provide a valid URL.");
-      return;
-    }
-    setFormData((prev) => ({
-      ...prev,
-      socialLinks: [...prev.socialLinks, socialInput],
-    }));
-    setSocialInput({ icon: <FaFacebook />, name: "Facebook", url: "" });
-  };
-
   const handleShowModal = (title: string) => {
     setModalTitle(title);
     setIsModalVisible(true);
-  };
-
-  const handleAddOrEditRow = (): void => {
-    if (!formData.name || !formData.title || !formData.photo) {
-      handleShowModal("Please fill in all fields.");
-      return;
-    }
-
-    if (editingRow !== null) {
-      setRows((prev) =>
-        prev.map((row, index) => (index === editingRow ? { ...formData } : row))
-      );
-      setEditingRow(null);
-    } else {
-      setRows((prev) => [...prev, { ...formData }]);
-    }
-    setFormData({
-      photo: "",
-      name: "",
-      title: "",
-      socialLinks: [],
-      visible: true,
-    });
-  };
-
-  const handleSortRows = (): void => {
-    setRows((prevRows) => [...prevRows].reverse());
   };
 
   const handleOpenModal = (title: string) => {
@@ -294,7 +254,7 @@ const CreateBlog = () => {
                     height={47.2}
                   />
                   <button
-                    onClick={() => handleDeleteIconImage(index)}
+                    // onClick={() => handleDeleteIconImage(index)}
                     className="absolute -top-3 -right-3 overflow-visible bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center"
                   >
                     <IoMdCloseCircle color="red" />
@@ -484,7 +444,10 @@ const CreateBlog = () => {
                   className="rounded w-80 h-13 px-3 border border-[#000000]"
                   value={formData.title}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                    setFormData((prev: any) => ({
+                      ...prev,
+                      title: e.target.value,
+                    }))
                   }
                 />
               </span>
@@ -499,7 +462,10 @@ const CreateBlog = () => {
                   className="rounded w-80 h-13 px-3 border border-[#000000]"
                   value={formData.tag}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, tag: e.target.value }))
+                    setFormData((prev: any) => ({
+                      ...prev,
+                      tag: e.target.value,
+                    }))
                   }
                 />
               </span>
@@ -515,13 +481,11 @@ const CreateBlog = () => {
                   config={{
                     height: 150,
                   }}
-                  onBlur={
-                    (newContent) =>
-                      setFormData((prev: any) => ({
-                        ...prev,
-                        description: newContent,
-                      }))
-                    // setEditModal({ ...editModal, description: newContent })
+                  onBlur={(newContent) =>
+                    setFormData((prev: any) => ({
+                      ...prev,
+                      description: newContent,
+                    }))
                   }
                 />
               </div>

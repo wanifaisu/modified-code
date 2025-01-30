@@ -49,6 +49,7 @@ const CreateService = () => {
     images: null,
     name: "",
     title: "",
+
     tag: "",
     projectPlanning: "",
     uploadDate: new Date().toISOString().split("T")[0],
@@ -123,7 +124,7 @@ const CreateService = () => {
     setIsModalVisible(false);
     setFormData({
       id: Math.random(),
-      icon: null,
+      images: "",
       name: "",
       title: "",
       tag: "",
