@@ -36,7 +36,7 @@ interface FormData {
   title: string;
   projectPlanning: string;
   price: string;
-  description: string;
+  tag: string;
   uploadDate: string;
   visible: boolean;
 }
@@ -54,11 +54,12 @@ const CreateTemplate = () => {
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [rows, setRows] = useState<RowData[]>([]);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [templateArr, setTemplateArr] = useState<any>(templatesDataArray);
   const [formData, setFormData] = useState<FormData>({
     images: [],
     title: "",
     price: "",
-    description: "",
+    tag: "",
     projectPlanning: "",
     uploadDate: new Date().toISOString().split("T")[0],
     visible: true,
@@ -71,18 +72,23 @@ const CreateTemplate = () => {
   const handleClick = () => hiddenFileInput.current?.click();
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const newImages = Array.from(files);
-      if (formData.images.length + newImages.length > MAX_UPLOAD_LIMIT) {
-        alert(`You can only upload up to ${MAX_UPLOAD_LIMIT} images.`);
-        return;
-      }
-      setFormData((prev) => ({
-        ...prev,
-        images: [...prev.images, ...newImages],
-      }));
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prev: any) => ({ ...prev, images: fileUrl }));
     }
+    // if (files) {
+    //   const newImages = Array.from(files);
+    //   if (formData.images.length + newImages.length > MAX_UPLOAD_LIMIT) {
+    //     alert(`You can only upload up to ${MAX_UPLOAD_LIMIT} images.`);
+    //     return;
+    //   }
+    //   setFormData((prev) => ({
+    //     ...prev,
+    //     images: [...prev.images, ...newImages],
+    //   }));
+    // }
   };
 
   const handleDeleteImage = (index: number) => {
@@ -100,7 +106,7 @@ const CreateTemplate = () => {
       images: [],
       title: "",
       price: "",
-      description: "",
+      tag: "",
       projectPlanning: "",
       uploadDate: new Date().toISOString().split("T")[0],
       visible: false,
@@ -112,21 +118,27 @@ const CreateTemplate = () => {
     if (
       !formData.title ||
       !formData.price ||
-      !formData.description ||
-      !formData.projectPlanning ||
-      formData.images.length === 0
+      !formData.tag ||
+      !formData.projectPlanning
+      // formData.images.length === 0
     ) {
       alert("All fields, including at least one image, are required.");
       return;
     }
 
     if (editingIndex !== null) {
+      setTemplateArr((prev: any) => {
+        const updatedRows = [...prev];
+        updatedRows[editingIndex] = formData;
+        return updatedRows;
+      });
       setRows((prev) => {
         const updatedRows = [...prev];
         updatedRows[editingIndex] = formData;
         return updatedRows;
       });
     } else {
+      setTemplateArr((prev: any) => [...prev, formData]);
       setRows((prev) => [...prev, formData]);
     }
 
@@ -135,7 +147,8 @@ const CreateTemplate = () => {
 
   const handleEdit = (index: number) => {
     setEditingIndex(index);
-    setEditModal({ ...templatesDataArray[index] });
+    setFormData({ ...templateArr[index] });
+    setEditModal({ ...templateArr[index] });
     handleOpenModal("Edit");
   };
 
@@ -151,9 +164,10 @@ const CreateTemplate = () => {
     setRows((prevRows) => [...prevRows].reverse());
   };
 
-  const handleDeleteRow = (index: number) =>
+  const handleDeleteRow = (index: number) => {
+    setTemplateArr((prev: any) => prev.filter((_: any, i: any) => i !== index));
     setRows((prev) => prev.filter((_, i) => i !== index));
-
+  };
   const [previewImage, setPreviewImage] = useState<File | null>(null);
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
   const hiddenIconInput = useRef<HTMLInputElement>(null);
@@ -361,83 +375,89 @@ const CreateTemplate = () => {
             </tr>
           </thead>
           <tbody>
-            {templatesDataArray.map((row, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                } md:text-base text-sm`}
-              >
-                <td className="p-3 text-center border-r border-black border-opacity-50">
-                  <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                    <span
-                      className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                    >
-                      {index + 1}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-3 text-center mx-auto border-r border-black border-opacity-50">
-                  {row.images && (
-                    <Image
-                      src={row.images}
-                      width={70}
-                      height={50}
-                      alt="image"
-                      className="rounded-md"
-                    />
-                  )}
-                </td>
-                <td
-                  className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+            {templateArr && templateArr?.length > 0 ? (
+              templateArr.map((row: any, index: any) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
+                  } md:text-base text-sm`}
                 >
-                  {row.visible ? row.title : "*****"}
-                </td>
-                <td
-                  className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
-                >
-                  {row.tag}
-                </td>
-                <td
-                  className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                >
-                  {row.visible ? row.price : "*****"}
-                </td>
-                <td
-                  className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                >
-                  {row.uploadDate}
-                </td>
-                <td className="p-3 text-center border-r border-black border-opacity-50">
-                  <div className="flex justify-center space-x-2">
-                    <button
-                      onClick={handleSortRows}
-                      className="text-yellow-600"
-                    >
-                      <TiArrowUnsorted size={20} />
-                    </button>
-                    <button
-                      onClick={() => handleToggleVisibility(index)}
-                      className="text-green-600"
-                    >
-                      <RxSwitch size={20} />
-                    </button>
-                    <button
-                      className="text-blue-600"
-                      onClick={() => handleEdit(index)}
-                    >
-                      <CiEdit size={20} />
-                    </button>
-                    <button
-                      className="text-red-600"
-                      onClick={() => handleDeleteRow(index)}
-                    >
-                      <BsTrash3 size={20} />
-                    </button>
-                  </div>
-                </td>
+                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                      <span
+                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
+                      >
+                        {index + 1}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="p-3 text-center mx-auto border-r border-black border-opacity-50">
+                    {row.images && (
+                      <Image
+                        src={row.images}
+                        width={70}
+                        height={50}
+                        alt="image"
+                        className="rounded-md"
+                      />
+                    )}
+                  </td>
+                  <td
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.visible ? row.title : "*****"}
+                  </td>
+                  <td
+                    className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
+                  >
+                    {row.tag}
+                  </td>
+                  <td
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.visible ? row.price : "*****"}
+                  </td>
+                  <td
+                    className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.uploadDate}
+                  </td>
+                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                    <div className="flex justify-center space-x-2">
+                      <button
+                        onClick={handleSortRows}
+                        className="text-yellow-600"
+                      >
+                        <TiArrowUnsorted size={20} />
+                      </button>
+                      <button
+                        onClick={() => handleToggleVisibility(index)}
+                        className="text-green-600"
+                      >
+                        <RxSwitch size={20} />
+                      </button>
+                      <button
+                        className="text-blue-600"
+                        onClick={() => handleEdit(index)}
+                      >
+                        <CiEdit size={20} />
+                      </button>
+                      <button
+                        className="text-red-600"
+                        onClick={() => handleDeleteRow(index)}
+                      >
+                        <BsTrash3 size={20} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6}>No Data Found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -469,25 +489,7 @@ const CreateTemplate = () => {
                 ref={hiddenFileInput}
                 multiple
               />
-              {/* <div className="grid grid-cols-3 gap-4 justify-center">
-                {formData.images.map((image, index) => (
-                  <div key={index} className="relative flex flex-col items-center">
-                    <Image
-                      src={URL.createObjectURL(image)}
-                      width={50}
-                      height={30}
-                      alt="Preview"
-                      className="rounded-md"
-                    />
-                    <button
-                      onClick={() => handleDeleteImage(index)}
-                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
-                    >
-                      <BsTrash3 color='red' />
-                    </button>
-                  </div>
-                ))}
-              </div> */}
+
               <button
                 className={`${poppins.className} font-semibold text-base bg-[#ffb200] p-2 w-24 rounded-lg text-black dark:bg-slate-800`}
                 onClick={handleSave}
@@ -522,9 +524,9 @@ const CreateTemplate = () => {
                   <input
                     type="text"
                     className={`rounded w-full h-10 ${poppins.className} font-medium text-[20px] leading-[31px] text-[#000000CC]`}
-                    value={formData.price}
+                    value={formData.tag}
                     onChange={(e) =>
-                      setFormData({ ...formData, price: e.target.value })
+                      setFormData({ ...formData, tag: e.target.value })
                     }
                   />
                 </span>
@@ -552,24 +554,15 @@ const CreateTemplate = () => {
                   <input
                     type="text"
                     className={`rounded w-full h-10 ${poppins.className} font-medium text-[20px] leading-[31px] text-[#000000CC]`}
-                    value={formData.price}
+                    value={formData.projectPlanning}
                     onChange={(e) =>
-                      setFormData({ ...formData, price: e.target.value })
+                      setFormData({
+                        ...formData,
+                        projectPlanning: e.target.value,
+                      })
                     }
                   />
                 </span>
-
-                {/* <div>
-                  <label className="text-md py-5">Description</label>
-                  <JoditEditor
-                    ref={editorRef}
-                    value={formData.description}
-                    config={{
-                      height: 200,
-                    }}
-                    onBlur={(newContent) => setFormData({ ...formData, description: newContent })}
-                  />
-                </div> */}
               </div>
             </div>
           </div>

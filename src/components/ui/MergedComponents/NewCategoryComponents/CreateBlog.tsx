@@ -448,13 +448,6 @@ const CreateBlog = () => {
               />
               <div className="flex flex-row gap-3 ml-4">
                 <div className="relative w-[101px] h-20 bg-[#CCCCFF33] rounded shadow-xl">
-                  {/* <Image
-                    src={formData.thumbnail}
-                    width={62}
-                    height={50}
-                    alt="Preview"
-                    className="object-cover mt-8 ml-3"
-                  /> */}
                   {formData?.thumbnail && (
                     <Image
                       src={formData?.thumbnail}

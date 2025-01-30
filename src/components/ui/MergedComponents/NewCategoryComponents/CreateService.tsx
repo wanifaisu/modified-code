@@ -23,10 +23,11 @@ const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 interface RowData {
   id: number;
-  icon: File | null;
+  images: File | null;
   name: string;
   title: string;
   tag: string;
+  projectPlanning: string;
   uploadDate: string;
   visible: boolean;
 }
@@ -45,14 +46,16 @@ const CreateService = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [formData, setFormData] = useState<RowData>({
     id: Math.random(),
-    icon: null,
+    images: null,
     name: "",
     title: "",
     tag: "",
+    projectPlanning: "",
     uploadDate: new Date().toISOString().split("T")[0],
     visible: true,
   });
 
+  const [serviceArr, setServiceArr] = useState<any>(templatesDataArray);
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingRow, setEditingRow] = useState<number | null>(null);
@@ -71,7 +74,8 @@ const CreateService = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setFormData((prev) => ({ ...prev, icon: file }));
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prev: any) => ({ ...prev, images: fileUrl }));
     }
   };
 
@@ -131,18 +135,27 @@ const CreateService = () => {
 
   const handleSaveOrEdit = (): void => {
     // Validate required fields
-    if (!formData.title || !formData.tag || !formData.icon) {
+    if (!formData.title || !formData.tag || !formData.images) {
       alert("Please fill in all required fields, including an image.");
       return;
     }
 
     if (editingRow !== null) {
       // Update the row in edit mode
+      setServiceArr((prev: any) =>
+        prev.map((row: any, index: any) =>
+          index === editingRow ? { ...formData } : row
+        )
+      );
       setRows((prev) =>
         prev.map((row, index) => (index === editingRow ? { ...formData } : row))
       );
     } else {
       // Add a new row
+      setServiceArr((prev: any) => [
+        ...prev,
+        { ...formData, id: Math.random() },
+      ]);
       setRows((prev) => [...prev, { ...formData, id: Math.random() }]);
     }
 
@@ -151,11 +164,15 @@ const CreateService = () => {
 
   const handleEditRow = (index: number): void => {
     setEditingRow(index);
+    setFormData({ ...serviceArr[index] });
     setEditModal(templatesDataArray[index]);
     handleOpenModal("Edit Blog");
   };
 
   const handleDeleteRow = (id: number): void => {
+    setServiceArr((prev: any) =>
+      prev.filter((_: any, index: any) => index !== id)
+    );
     setRows((prev) => prev.filter((_, index) => index !== id));
   };
 
@@ -377,68 +394,74 @@ const CreateService = () => {
             </tr>
           </thead>
           <tbody>
-            {templatesDataArray.map((row, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                } md:text-base text-sm`}
-              >
-                <td className="p-3 text-center border-r border-black border-opacity-50">
-                  <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                    <span
-                      className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                    >
-                      {index + 1}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-3 border-r border-black border-opacity-50">
-                  <div className="flex justify-center">
-                    {row.images && (
-                      <Image
-                        src={row.images}
-                        width={100}
-                        height={50}
-                        alt="Blog Image"
-                        className="object-contain"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td
-                  className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+            {serviceArr && serviceArr?.length > 0 ? (
+              serviceArr.map((row: any, index: any) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
+                  } md:text-base text-sm`}
                 >
-                  {row.visible ? row.title : "*****"}
-                </td>
-                <td
-                  className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
-                >
-                  {row.visible ? row.tag : "*****"}
-                </td>
-                <td
-                  className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                >
-                  {row.uploadDate}
-                </td>
-                <td className="p-3 border-r border-black border-opacity-50">
-                  <div className="flex justify-center gap-2">
-                    <button onClick={handleReorder}>
-                      <TiArrowUnsorted color="yellow" />
-                    </button>
-                    <button onClick={() => handleToggleVisibility(index)}>
-                      <RxSwitch />
-                    </button>
-                    <button onClick={() => handleEditRow(index)}>
-                      <CiEdit color="green" />
-                    </button>
-                    <button onClick={() => handleDeleteRow(index)}>
-                      <BsTrash3 color="red" />
-                    </button>
-                  </div>
-                </td>
+                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                      <span
+                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
+                      >
+                        {index + 1}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="p-3 border-r border-black border-opacity-50">
+                    <div className="flex justify-center">
+                      {row.images && (
+                        <Image
+                          src={row.images}
+                          width={100}
+                          height={50}
+                          alt="Blog Image"
+                          className="object-contain"
+                        />
+                      )}
+                    </div>
+                  </td>
+                  <td
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.visible ? row.title : "*****"}
+                  </td>
+                  <td
+                    className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
+                  >
+                    {row.visible ? row.tag : "*****"}
+                  </td>
+                  <td
+                    className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.uploadDate}
+                  </td>
+                  <td className="p-3 border-r border-black border-opacity-50">
+                    <div className="flex justify-center gap-2">
+                      <button onClick={handleReorder}>
+                        <TiArrowUnsorted color="yellow" />
+                      </button>
+                      <button onClick={() => handleToggleVisibility(index)}>
+                        <RxSwitch />
+                      </button>
+                      <button onClick={() => handleEditRow(index)}>
+                        <CiEdit color="green" />
+                      </button>
+                      <button onClick={() => handleDeleteRow(index)}>
+                        <BsTrash3 color="red" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6}>No Data Found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -472,13 +495,15 @@ const CreateService = () => {
                 />
                 <div className="flex flex-row gap-3 ml-4">
                   <div className="relative w-[101px] h-20 bg-[#CCCCFF33] rounded shadow-xl">
-                    <Image
-                      src={editModal.images}
-                      width={62}
-                      height={50}
-                      alt="Preview"
-                      className="object-cover mt-8 ml-3"
-                    />
+                    {formData?.images && (
+                      <Image
+                        src={formData?.images}
+                        width={62}
+                        height={50}
+                        alt="Preview"
+                        className="object-cover mt-8 ml-3"
+                      />
+                    )}
                     <button
                       onClick={() => {}}
                       className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
@@ -490,7 +515,7 @@ const CreateService = () => {
               </div>
               <button
                 className="bg-[#ffb200] w-44 h-[45px] rounded-lg text-[#000000] dark:bg-slate-800"
-                onClick={() => {}}
+                onClick={handleSaveOrEdit}
               >
                 Save
               </button>
@@ -522,7 +547,7 @@ const CreateService = () => {
                   className="rounded-[5px] w-[300px] h-14 border border-[#000000]"
                   value={formData.tag}
                   onChange={(e) =>
-                    setEditModal((prev) => ({ ...prev, tag: e.target.value }))
+                    setFormData((prev) => ({ ...prev, tag: e.target.value }))
                   }
                 />
               </span>
@@ -535,12 +560,12 @@ const CreateService = () => {
                 </label>
                 <JoditEditor
                   ref={editorRef}
-                  value={editModal.projectPlanning}
+                  value={formData.projectPlanning}
                   config={{
                     height: 200,
                   }}
                   onBlur={(newContent) =>
-                    setEditModal({ ...editModal, projectPlanning: newContent })
+                    setFormData({ ...formData, projectPlanning: newContent })
                   }
                 />
               </div>

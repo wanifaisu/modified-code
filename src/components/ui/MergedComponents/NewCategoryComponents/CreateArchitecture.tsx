@@ -57,6 +57,8 @@ const CreateArchitecture = () => {
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [rows, setRows] = useState<RowData[]>([]);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [architectureArr, setArchitectureArr] =
+    useState<any>(templatesDataArray);
   const [formData, setFormData] = useState<FormData>({
     images: [],
     title: "",
@@ -152,6 +154,7 @@ const CreateArchitecture = () => {
 
   const handleEdit = (index: number) => {
     setEditingIndex(index);
+    setFormData({ ...architectureArr[index] });
     setEditModal({ ...templatesDataArray[index] });
     handleOpenModal("Edit");
   };
@@ -170,6 +173,9 @@ const CreateArchitecture = () => {
 
   const handleDeleteRow = (index: number) => {
     setRows((prev) => prev.filter((_, i) => i !== index));
+    setArchitectureArr((prev: any) =>
+      prev.filter((_: any, i: any) => i !== index)
+    );
     axios
       .post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/delete/architecture`,
@@ -229,7 +235,7 @@ const CreateArchitecture = () => {
         setRows(res.data);
       });
   }, [rows]);
-
+  console.error(architectureArr, "architectureArr");
   return (
     <div className="p-4 mt-[-4rem]">
       <span>Banner</span>
@@ -399,83 +405,89 @@ const CreateArchitecture = () => {
             </tr>
           </thead>
           <tbody>
-            {templatesDataArray?.map((row, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                } md:text-base text-sm`}
-              >
-                <td className="p-3 text-center border-r border-black border-opacity-50">
-                  <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
-                    <span
-                      className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
-                    >
-                      {index + 1}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-3 text-center mx-auto border-r border-black border-opacity-50">
-                  {row.images && (
-                    <Image
-                      src={row.images}
-                      width={70}
-                      height={50}
-                      alt="image"
-                      className="rounded-md"
-                    />
-                  )}
-                </td>
-                <td
-                  className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+            {architectureArr && architectureArr?.length > 0 ? (
+              architectureArr.map((row: any, index: any) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
+                  } md:text-base text-sm`}
                 >
-                  {row.visible ? row.title : "*****"}
-                </td>
-                <td
-                  className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
-                >
-                  {row.projectPlanning}
-                </td>
-                <td
-                  className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                >
-                  {row.visible ? row.price : "*****"}
-                </td>
-                <td
-                  className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
-                >
-                  {row.uploadDate}
-                </td>
-                <td className="p-3 text-center border-r border-black border-opacity-50">
-                  <div className="flex justify-center space-x-2">
-                    <button
-                      onClick={handleSortRows}
-                      className="text-yellow-600"
-                    >
-                      <TiArrowUnsorted size={20} />
-                    </button>
-                    <button
-                      onClick={() => handleToggleVisibility(index)}
-                      className="text-green-600"
-                    >
-                      <RxSwitch size={20} />
-                    </button>
-                    <button
-                      className="text-blue-600"
-                      onClick={() => handleEdit(index)}
-                    >
-                      <CiEdit size={20} />
-                    </button>
-                    <button
-                      className="text-red-600"
-                      onClick={() => handleDeleteRow(index)}
-                    >
-                      <BsTrash3 size={20} />
-                    </button>
-                  </div>
-                </td>
+                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                    <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
+                      <span
+                        className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
+                      >
+                        {index + 1}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="p-3 text-center mx-auto border-r border-black border-opacity-50">
+                    {row.images && (
+                      <Image
+                        src={row.images}
+                        width={70}
+                        height={50}
+                        alt="image"
+                        className="rounded-md"
+                      />
+                    )}
+                  </td>
+                  <td
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.visible ? row.title : "*****"}
+                  </td>
+                  <td
+                    className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
+                  >
+                    {row.projectPlanning}
+                  </td>
+                  <td
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.visible ? row.price : "*****"}
+                  </td>
+                  <td
+                    className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                  >
+                    {row.uploadDate}
+                  </td>
+                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                    <div className="flex justify-center space-x-2">
+                      <button
+                        onClick={handleSortRows}
+                        className="text-yellow-600"
+                      >
+                        <TiArrowUnsorted size={20} />
+                      </button>
+                      <button
+                        onClick={() => handleToggleVisibility(index)}
+                        className="text-green-600"
+                      >
+                        <RxSwitch size={20} />
+                      </button>
+                      <button
+                        className="text-blue-600"
+                        onClick={() => handleEdit(index)}
+                      >
+                        <CiEdit size={20} />
+                      </button>
+                      <button
+                        className="text-red-600"
+                        onClick={() => handleDeleteRow(index)}
+                      >
+                        <BsTrash3 size={20} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6}>No Data Found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -509,7 +521,7 @@ const CreateArchitecture = () => {
                   multiple
                 />
                 <div className="flex flex-row gap-3 ml-4">
-                  {formData.images.map((image, index) => (
+                  {formData?.images?.map((image, index) => (
                     <div
                       key={index}
                       className="relative w-[101px] h-20 bg-[#CCCCFF33] rounded shadow-xl"
