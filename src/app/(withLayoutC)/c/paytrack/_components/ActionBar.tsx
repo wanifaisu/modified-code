@@ -13,19 +13,19 @@ const ActionBar = ({ onStartDate, onEndDate }) => {
       <div className="flex gap-1">
         <button
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
-          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-3 rounded-lg"
+          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-3 rounded-lg dark:bg-boxdark dark:text-white font-inter"
         >
           Security Deposit
         </button>
         <button
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
-          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-3 rounded-lg"
+          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-3 rounded-lg dark:bg-boxdark dark:text-white font-inter"
         >
           Accepted payment
         </button>
         <button
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
-          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-2 rounded-lg"
+          className="font-inter font-medium text-[10px] leading-[12.1px] px-2 bg-[#FFFFFF] text-black py-2 rounded-lg dark:bg-boxdark dark:text-white font-inter"
         >
           Sending Return{" "}
         </button>
@@ -34,7 +34,7 @@ const ActionBar = ({ onStartDate, onEndDate }) => {
       <div className="flex items-center gap-2">
         <DatePicker
           onChange={onStartDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter ark:placeholder:text-white"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -42,7 +42,7 @@ const ActionBar = ({ onStartDate, onEndDate }) => {
         <span>To</span>
         <DatePicker
           onChange={onEndDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter dark:placeholder:text-white"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -51,7 +51,7 @@ const ActionBar = ({ onStartDate, onEndDate }) => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className={`${poppins.className} font-medium text-[10px] leading-[15.5px] text-center rounded-lg px-2 py-2 bg-white text-black`}
+          className={`${poppins.className} font-medium text-[10px] leading-[15.5px] text-center rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter`}
         >
           <option value="" disabled selected>
             Payment Method

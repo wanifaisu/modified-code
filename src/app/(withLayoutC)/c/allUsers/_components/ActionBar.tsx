@@ -8,7 +8,7 @@ const ActionBar = () => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
         >
           <option value="" disabled selected>
             Country
@@ -22,7 +22,7 @@ const ActionBar = () => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
         >
           <option value="" disabled selected>
             Currency
@@ -34,14 +34,14 @@ const ActionBar = () => {
       </div>
 
       <DatePicker
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
       />
-      <span className="text-black-4">To</span>
+      <span className="text-black-4 ">To</span>
       <DatePicker
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -50,7 +50,7 @@ const ActionBar = () => {
       <select
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
         defaultValue=""
-        className="rounded-lg bg-white px-2 py-2 text-black"
+        className="rounded-lg bg-white px-2 py-2 text-black dark:bg-boxdark dark:text-white font-inter"
       >
         <option value="" disabled selected>
           Payment Method
@@ -63,7 +63,7 @@ const ActionBar = () => {
       <select
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
         defaultValue=""
-        className="rounded-lg px-2 py-2 bg-white text-black"
+        className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
       >
         <option value="" disabled selected>
           Status

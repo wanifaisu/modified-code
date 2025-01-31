@@ -3,6 +3,7 @@ import { BsPerson } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import {
+  Building,
   CreditCard,
   Database,
   HomeIcon,
@@ -40,7 +41,7 @@ export const CNavItem: navItem[] = [
     id: 4,
     title: " Orders",
     url: "/c/orders",
-    icon: undefined,
+    icon: Users,
     image: "/icons/order.png",
   },
 
@@ -48,14 +49,14 @@ export const CNavItem: navItem[] = [
     id: 5,
     title: "Payment",
     url: "/c/allpayments",
-    icon: undefined,
+    icon: CreditCard,
     image: "/icons/payments.png",
   },
   {
     id: 6,
     title: "Agency",
     url: "/c/agency",
-    icon: GiHamburgerMenu,
+    icon: Building,
     image: undefined,
   },
   {

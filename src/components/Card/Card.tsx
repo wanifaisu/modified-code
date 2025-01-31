@@ -8,7 +8,7 @@ interface CardProps {
 
 function Card({ title, value }: CardProps) {
   return (
-    <article className="rounded-md px-3 py-2 first:bg-[#FFB200] hover:bg-[#FFB200] bg-[#FFFFFF] text-[#231F20] flex items-center justify-between gap-x-4">
+    <article className="rounded-md px-3 py-2 bg-[#FFFFFF] text-[#231F20] flex items-center justify-between gap-x-4 hover:bg-[#FFB200] dark:bg-boxdark dark:text-white dark:border-white border transition-colors duration-300">
       <h3 className="font-medium font-inter text-base capitalize">{title}</h3>
       <div className="grid gap-y-4">
         <div className="flex gap-x-2">

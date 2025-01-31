@@ -104,26 +104,26 @@ export const PayTrackTable: React.FC = () => {
 
         {/* Data Table */}
 
-        <div className="rounded-t-lg overflow-hidden">
-          <table className="table-auto w-full rounded border-collapse">
-            <thead className="bg-[#FFB200] text-sm rounded-full">
+        <div className="rounded-t-lg overflow-hidden ">
+          <table className="table-auto w-full rounded border-collapse ">
+            <thead className="bg-[#FFB200] text-sm rounded-full dark:bg-boxdark">
               <tr>
                 {Array(5)
                   .fill(null)
                   .map((_, i) => (
                     <React.Fragment key={i}>
                       <th
-                        className={`${poppins.className} text-[#231F20] font-semibold text-[10.85px] leading-[16.28px] p-2`}
+                        className={`${poppins.className} text-[#231F20] font-semibold text-[10.85px] leading-[16.28px] p-2 dark:text-white `}
                       >
                         No.
                       </th>
                       <th
-                        className={`${poppins.className} text-[#231F20] font-medium text-[10.85px] leading-[16.28px] p-2`}
+                        className={`${poppins.className} text-[#231F20] font-medium text-[10.85px] leading-[16.28px] p-2 dark:text-white `}
                       >
                         Currency ISO
                       </th>
                       <th
-                        className={`${poppins.className} text-[#231F20] font-semibold text-[10.85px] leading-[16.28px] p-2`}
+                        className={`${poppins.className} text-[#231F20] font-semibold text-[10.85px] leading-[16.28px] p-2 dark:text-white `}
                       >
                         Amount
                       </th>
@@ -131,9 +131,12 @@ export const PayTrackTable: React.FC = () => {
                   ))}
               </tr>
             </thead>
-            <tbody className="text-center border border-[#FFB200]">
+            <tbody className="text-center border border-[#FFB200]  ">
               {Array.from({ length: 5 }).map((_, rowIndex) => (
-                <tr key={rowIndex} className="odd:bg-[#FAEFD8] even:bg-white">
+                <tr
+                  key={rowIndex}
+                  className="odd:bg-[#FAEFD8] even:bg-white dark:bg-boxdark"
+                >
                   {/* Render 5 items per row with their serial numbers, Currency ISO, and Amount */}
                   {chunkedData.map((chunk, chunkIndex) => {
                     const rowData = chunk[rowIndex];
@@ -142,17 +145,17 @@ export const PayTrackTable: React.FC = () => {
                         {/* Serial Number */}
                         <td className="py-3 border-r border-r-[#FFB200] ">
                           <div
-                            className={`${poppins.className} font-bold text-black text-[9.72px] leading-[22.58px] w-[22.48px] h-[22.28px] bg-[#FFB200] mx-auto`}
+                            className={`${poppins.className} font-bold text-black text-[9.72px] leading-[22.58px] w-[22.48px] h-[22.28px] bg-[#FFB200] mx-auto `}
                           >
                             {rowData ? rowIndex + 1 + chunkIndex * 5 : ""}
                           </div>
                         </td>
                         {/* Currency ISO */}
-                        <td className="py-3 border-r border-r-[#FFB200]">
+                        <td className="py-3 border-r border-r-[#FFB200] dark:text-white font-inter">
                           {rowData ? rowData.currencyISO : ""}
                         </td>
                         {/* Amount */}
-                        <td className="py-3 border-r border-r-[#FFB200]">
+                        <td className="py-3 border-r border-r-[#FFB200] dark:text-white font-inter">
                           {rowData ? rowData.amount : ""}
                         </td>
                       </>

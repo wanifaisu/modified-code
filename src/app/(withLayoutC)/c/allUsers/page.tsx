@@ -98,8 +98,8 @@ const AllUsers: React.FC = () => {
               <span className="text-black font-bold">
                 Showing 1 to 5 of 50 Results
               </span>
-              <div className="w-30 h-9  border bg-[#FFB200] rounded-[10px] flex flex-row justify-center items-center">
-                <span className="text-[#231F20] font-inter font-semibold text-[13px] leading-[16px]">
+              <div className="w-30 h-9  border bg-[#FFB200] rounded-[10px] flex flex-row justify-center items-center dark:bg-boxdark  ">
+                <span className="text-[#231F20] font-inter font-semibold text-[13px] leading-[16px] font-inter dark:text-white">
                   More Results
                 </span>
               </div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 
 type OrderItem = {
@@ -18,10 +17,10 @@ const OrderModal: React.FC<OrderModalProps> = ({ isOpen, onClose, orders }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed text-black -mt-4 inset-28 z-50 flex items-center justify-end">
+    <div className="fixed text-black -mt-4 top-24 z-50 flex items-center justify-end">
       <div className="bg-white rounded-lg shadow-lg w-80 p-4 relative">
         {/* Close button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
         >
@@ -57,9 +56,7 @@ const OrderModal: React.FC<OrderModalProps> = ({ isOpen, onClose, orders }) => {
 
         {/* Footer */}
         <div className="mt-4 text-right">
-          <button className="text-gray-600 text-sm">
-            see All Orders
-          </button>
+          <button className="text-gray-600 text-sm">see All Orders</button>
         </div>
       </div>
     </div>

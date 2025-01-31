@@ -148,19 +148,13 @@ const Sidebar = ({
                       //   item.title.toLowerCase() === "logout" && "transform rotate-180"
                       // }`}
                     >
-                      <div className="flex items-center justify-center w-6 h-6 flex-shrink-0">
-                        {item.icon ? (
-                          <item.icon />
-                        ) : item.image ? (
-                          <Image
-                            src={item.image}
-                            width={16}
-                            height={16}
-                            alt="icon"
-                          />
-                        ) : null}
+                      <div className="flex items-center justify-center w-6 h-6 flex-shrink-0 dark:text-white font-inter">
+                        {item.icon && <item.icon />}
                       </div>
-                      {item.title}
+                      <p className="dark:text-white font-inter">
+                        {" "}
+                        {item.title}
+                      </p>
                     </div>
                   </Link>
                 );

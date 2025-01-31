@@ -482,9 +482,9 @@ const ECommerce: React.FC = () => {
           <div className="items-center min-h-screen p-6">
             <div className="flex flex-col lg:flex-row justify-between gap-4">
               {/* Traffic by Device */}
-              <div className="bg-white rounded-[20px] shadow-lg p-6 w-full lg:w-1/2 mb-8">
+              <div className="bg-white rounded-[20px] shadow-lg p-6 w-full lg:w-1/2 mb-8 dark:bg-boxdark">
                 <h2
-                  className={`${inter.className} text-black text-base font-semibold mb-4`}
+                  className={`${inter.className} text-black text-base font-semibold mb-4 dark:text-white`}
                 >
                   Traffic by Device
                 </h2>
@@ -494,9 +494,9 @@ const ECommerce: React.FC = () => {
               </div>
 
               {/* Traffic by Location */}
-              <div className="bg-white rounded-[20px] shadow-lg p-6 w-full lg:w-1/2 mb-8">
+              <div className="bg-white rounded-[20px] shadow-lg p-6 w-full lg:w-1/2 mb-8 dark:bg-boxdark">
                 <h2
-                  className={`${inter.className} text-black text-base font-semibold mb-4`}
+                  className={`${inter.className} text-black text-base font-semibold mb-4 dark:text-white`}
                 >
                   Traffic Location
                 </h2>
@@ -507,9 +507,9 @@ const ECommerce: React.FC = () => {
             </div>
 
             {/* Marketing & SEO */}
-            <div className="bg-[#FFF] rounded-2xl p-6 lg:p-8 w-full max-w-full h-auto lg:h-[500px] shadow-lg mt-8">
+            <div className="bg-[#FFF] rounded-2xl p-6 lg:p-8 w-full max-w-full h-auto lg:h-[500px] shadow-lg mt-8 dark:bg-boxdark">
               <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
-                <h2 className="text-[14px] lg:text-[16px] text-black font-semibold">
+                <h2 className="text-[14px] lg:text-[16px] text-black font-semibold dark:text-white">
                   Marketing & SEO
                 </h2>
                 <div className="flex items-center gap-2 mt-4 lg:mt-0">
@@ -518,7 +518,7 @@ const ECommerce: React.FC = () => {
                     placeholder="MM/DD/YYYY"
                     className="border rounded px-2 py-1 text-sm w-24 lg:w-32"
                   />
-                  <span className="text-sm">To</span>
+                  <span className="text-sm dark:border-white">To</span>
                   <input
                     type="text"
                     placeholder="MM/DD/YYYY"
@@ -534,35 +534,39 @@ const ECommerce: React.FC = () => {
         </div>
       </div>
       {/* chat column */}
-      <div className="mx-auto pl-3">
-        <div className="order-section bg-white rounded-2xl shadow-md p-3 w-[300px] max-w-4xl mb-8">
-          <div className="flex flex-row justify-between  mb-2">
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+      <div className="mx-auto pl-3 ">
+        <div className="order-section bg-white rounded-2xl shadow-md p-3 w-[300px] max-w-4xl mb-8 dark:bg-boxdark ">
+          <div className="flex flex-row justify-between  mb-2 ">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white ">
               New Orders
             </h2>
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white">
               New 2569
             </h2>
           </div>
-          <ul className="space-y-4">
+          <ul className="space-y-4 ">
             {orders.map((order, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2"
+                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2 dark:text-white dark:border-white "
               >
                 {/* Name and role */}
                 <div className="flex-1">
-                  <p className="font-inter font-normal text-black">
+                  <p className="font-inter font-normal text-black dark:text-white">
                     {order.name}
                   </p>
-                  <p className="text-sm text-gray-600">{order.task}</p>
+                  <p className="text-sm text-gray-600 dark:text-white">
+                    {order.task}
+                  </p>
                 </div>
 
                 <div className="flex-1">
-                  <p className="font-inter font-light text-black">
+                  <p className="font-inter font-light text-black dark:text-white">
                     {order.name}
                   </p>
-                  <p className="text-sm text-gray-500">{order.time}</p>
+                  <p className="text-sm text-gray-500 dark:text-white">
+                    {order.time}
+                  </p>
                 </div>
               </li>
             ))}
@@ -573,12 +577,12 @@ const ECommerce: React.FC = () => {
             </span>
           </div>
         </div>
-        <div className="chat-section whitespace-nowrap bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8">
+        <div className="chat-section whitespace-nowrap bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8 dark:bg-boxdark">
           <div className="flex flex-row justify-between  mb-2">
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white ">
               Agency
             </h2>
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white ">
               New 2569
             </h2>
           </div>
@@ -586,21 +590,25 @@ const ECommerce: React.FC = () => {
             {messages.map((message, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2"
+                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2 dark:border-white"
               >
                 {/* Name and role */}
                 <div className="flex-1">
-                  <p className="font-inter font-normal text-black">
+                  <p className="font-inter font-normal text-black dark:text-white ">
                     {message.name}
                   </p>
-                  <p className="text-sm text-gray-600">{message.text}</p>
+                  <p className="text-sm text-gray-600 dark:text-white ">
+                    {message.text}
+                  </p>
                 </div>
 
                 <div className="flex-1">
-                  <p className="font-inter font-light text-black">
+                  <p className="font-inter font-light text-black dark:text-white ">
                     {message.name}
                   </p>
-                  <p className="text-sm text-gray-500">{message.time}</p>
+                  <p className="text-sm text-gray-500 dark:text-white ">
+                    {message.time}
+                  </p>
                 </div>
               </li>
             ))}
@@ -611,12 +619,12 @@ const ECommerce: React.FC = () => {
             </span>
           </div>
         </div>
-        <div className="payment-section bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8">
+        <div className="payment-section bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8 dark:bg-boxdark">
           <div className="flex flex-row justify-between  mb-2">
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white">
               Payments
             </h2>
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white">
               New 59
             </h2>
           </div>
@@ -627,21 +635,25 @@ const ECommerce: React.FC = () => {
             {payments.map((payment, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2"
+                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2 dark:border-white"
               >
                 {/* Name and role */}
                 <div className="flex-1">
-                  <p className="font-inter font-normal text-black">
+                  <p className="font-inter font-normal text-black dark:text-white">
                     {payment.name}
                   </p>
-                  <p className="text-sm text-gray-600">{payment.bank}</p>
+                  <p className="text-sm text-gray-600 dark:text-white">
+                    {payment.bank}
+                  </p>
                 </div>
 
                 <div className="flex-1">
-                  <p className="font-inter font-light text-black">
+                  <p className="font-inter font-light text-black dark:text-white">
                     {payment.balance}
                   </p>
-                  <p className="text-sm text-gray-500">{payment.time}</p>
+                  <p className="text-sm text-gray-500 dark:text-white">
+                    {payment.time}
+                  </p>
                 </div>
               </li>
               // <li key={index} className='flex items-center space-x-3'>
@@ -660,17 +672,17 @@ const ECommerce: React.FC = () => {
             ))}
           </ul>
           <div className="flex flex-row justify-end mt-2">
-            <span className="w-[116px] text-center text-[12px] leading-[18px] rounded-md font-normal border border-[#FFB20033] py-2">
+            <span className="w-[116px] text-center text-[12px] leading-[18px] rounded-md font-normal border border-[#FFB20033] py-2 ">
               see all payments
             </span>
           </div>
         </div>
-        <div className="payment-section bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8">
+        <div className="payment-section bg-white rounded-2xl shadow-md p-3 w-full max-w-4xl mb-8 dark:bg-boxdark">
           <div className="flex flex-row justify-between  mb-2">
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white">
               Returns
             </h2>
-            <h2 className="header font-medium text-[#000000] text-sm font-inter">
+            <h2 className="header font-medium text-[#000000] text-sm font-inter dark:text-white">
               New 59
             </h2>
           </div>
@@ -681,21 +693,25 @@ const ECommerce: React.FC = () => {
             {withdrawals.map((withdraw, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2"
+                className="flex items-center space-x-3 border-[0.5px] border-[#00000030] rounded-xl px-2 py-2 dark:border-white"
               >
                 {/* Name and role */}
                 <div className="flex-1">
-                  <p className="font-inter font-normal text-black">
+                  <p className="font-inter font-normal text-black dark:text-white">
                     {withdraw.name}
                   </p>
-                  <p className="text-sm text-gray-600">{withdraw.bank}</p>
+                  <p className="text-sm text-gray-600 dark:text-white">
+                    {withdraw.bank}
+                  </p>
                 </div>
 
                 <div className="flex-1">
-                  <p className="font-inter font-light text-black">
+                  <p className="font-inter font-light text-black dark:text-white">
                     {withdraw.balance}
                   </p>
-                  <p className="text-sm text-gray-500">{withdraw.time}</p>
+                  <p className="text-sm text-gray-500 dark:text-white">
+                    {withdraw.time}
+                  </p>
                 </div>
               </li>
               // <li key={index} className='flex items-center space-x-3'>
