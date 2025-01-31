@@ -160,7 +160,7 @@ const CreateGlobalLocations: React.FC = () => {
                   />
                   <button
                     onClick={handleDeleteIconPreview}
-                    className="absolute top-1 right-[2px] bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                    className="absolute top-1 right-[2px] bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center dark:text-white font-inter dark:bg-boxdark"
                   >
                     <BsTrashFill color="red" />
                   </button>
@@ -180,7 +180,7 @@ const CreateGlobalLocations: React.FC = () => {
 
             {/* Save Button */}
             <Button
-              className={`w-[95px] h-12 bg-[#ffb200]  border border-[#FFB200] text-black rounded-lg px-4 ml-8`}
+              className={`dark:text-white font-inter dark:bg-boxdark w-[95px] h-12 bg-[#ffb200]  border border-[#FFB200] text-black rounded-lg px-4 ml-8`}
               onClick={handleSaveIconImage}
             >
               Save
@@ -201,7 +201,7 @@ const CreateGlobalLocations: React.FC = () => {
                   />
                   <button
                     onClick={() => handleDeleteIconImage(index)}
-                    className="absolute -top-3 -right-3 overflow-visible bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center"
+                    className="dark:text-white font-inter dark:bg-boxdark absolute -top-3 -right-3 overflow-visible bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center"
                   >
                     <IoMdCloseCircle color="red" />
                   </button>

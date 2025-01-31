@@ -1,33 +1,57 @@
 .payment-table .ant-table {
-    background: transparent;
-  }
-  
-  .payment-table .ant-table-thead > tr > th {
-    background: #FFB200 !important;
-    color: black;
-    font-weight: normal;
-    border-bottom: none;
-    padding: 12px 16px;
-    text-align: center;
-  }
-  
-  .payment-table .ant-table-tbody > tr > td {
-    background: #FFF8E7;
-    border-right: 1px solid #FFB200;
-    padding: 12px 16px;
-    text-align: center;
-  }
-  
-  .payment-table .ant-table-tbody > tr:hover > td {
-    background: #FFF3D4 !important;
-  }
-  
-  .payment-table .ant-pagination {
-    display: none;
-  }
-  
-  .payment-table .ant-table-container {
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-  }
+  background: transparent;
+}
+
+.payment-table .ant-table-thead > tr > th {
+  background: #FFB200 !important;
+  color: black;
+  font-weight: normal;
+  border-bottom: none;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.payment-table .ant-table-tbody > tr > td {
+  background: #FFF8E7;
+  border-right: 1px solid #FFB200;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.payment-table .ant-table-tbody > tr:hover > td {
+  background: #FFF3D4 !important;
+}
+
+.payment-table .ant-pagination {
+  display: none;
+}
+
+.payment-table .ant-table-container {
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Dark Mode Styling */
+.dark .payment-table .ant-table {
+  background: #1E1E2D; /* Dark background */
+}
+
+.dark .payment-table .ant-table-thead > tr > th {
+  background: #2A2A3C !important;
+  color: white;
+}
+
+.dark .payment-table .ant-table-tbody > tr > td {
+  background: #252537;
+  border-right: 1px solid #444; /* Subtle border */
+  color: white;
+}
+
+.dark .payment-table .ant-table-tbody > tr:hover > td {
+  background: #303047 !important;
+}
+
+.dark .payment-table .ant-table-container {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}

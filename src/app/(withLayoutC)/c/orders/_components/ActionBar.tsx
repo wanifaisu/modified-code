@@ -78,14 +78,14 @@ const projectName = [
   },
 ];
 
-const ActionBar = ({ type, setType, service }) => {
+const ActionBar = ({ type, setType, service }: any) => {
   return (
-    <div className="flex items-center justify-end gap-5">
-      <div className="ml-4">
+    <div className="flex items-center justify-end gap-5 ">
+      <div className="ml-4 dark:text-white font-inter">
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
         >
           <option value="" disabled selected>
             Currency
@@ -100,7 +100,7 @@ const ActionBar = ({ type, setType, service }) => {
         value={type}
         onChange={(e) => setType(e.target.value)}
         style={{ boxShadow: "0px 4px 4px #00000040" }}
-        className="rounded-lg px-2 py-2 bg-white text-black"
+        className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
       >
         <option value="" disabled selected>
           Type
@@ -112,14 +112,14 @@ const ActionBar = ({ type, setType, service }) => {
         ))}
       </select>
       <DatePicker
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
       />
       <span className="text-black-4">To</span>
       <DatePicker
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:bg-boxdark dark:text-white font-inter"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -130,7 +130,7 @@ const ActionBar = ({ type, setType, service }) => {
         defaultValue=""
         value={service}
         onChange={(e) => setService(e.target.value)}
-        className="rounded-lg px-2 py-2 bg-white text-black"
+        className="rounded-lg px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
       >
         <option value="" disabled selected>
           Service
@@ -146,7 +146,7 @@ const ActionBar = ({ type, setType, service }) => {
         defaultValue=""
         value={status}
         onChange={(e) => setStatus(e.target.value)}
-        className="rounded-lg  px-2 py-2 bg-white text-black"
+        className="rounded-lg  px-2 py-2 bg-white text-black dark:bg-boxdark dark:text-white font-inter"
       >
         <option value="" disabled selected>
           Status

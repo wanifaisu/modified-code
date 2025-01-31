@@ -9,7 +9,7 @@ const ActionBar = () => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black  dark:text-white font-inter dark:bg-boxdark"
         >
           <option value="" disabled selected>
             Currency
@@ -23,7 +23,7 @@ const ActionBar = () => {
         onChange={() => {
           console.log("Start Date");
         }}
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -33,7 +33,7 @@ const ActionBar = () => {
         onChange={() => {
           console.log("End Date");
         }}
-        className="py-2 bg-white w-35 placeholder:text-black"
+        className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
         placeholder="MM/DD/YYYY"
         suffixIcon={<CalendarIcon />}
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -42,7 +42,7 @@ const ActionBar = () => {
       <select
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
         defaultValue=""
-        className="rounded-lg px-2 py-2 bg-white text-black"
+        className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
       >
         <option value="" disabled selected>
           Payment Method
@@ -55,7 +55,7 @@ const ActionBar = () => {
       <select
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
         defaultValue=""
-        className="rounded-lg px-2 py-2 bg-white text-black"
+        className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
       >
         <option value="" disabled selected>
           Status

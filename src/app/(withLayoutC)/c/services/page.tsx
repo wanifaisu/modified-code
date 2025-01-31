@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 const ServicePage = () => {
   return (
     <div className="w-full 2xl:p-10 ml-[-2rem]">
-     
       <div>
         <ServiceTab />
       </div>

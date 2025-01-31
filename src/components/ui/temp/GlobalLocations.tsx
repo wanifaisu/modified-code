@@ -161,7 +161,7 @@ const CreateEmployee: React.FC = () => {
       <div className="flex items-center gap-4 mb-4">
         <DatePicker
           onChange={onStartDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -169,7 +169,7 @@ const CreateEmployee: React.FC = () => {
         <span className="text-black-4">To</span>
         <DatePicker
           onChange={onEndDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -179,19 +179,25 @@ const CreateEmployee: React.FC = () => {
       <div className="overflow-auto rounded-md bg-white shadow-sm">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-amber-400">
-              <th className="p-4 text-left text-black font-medium">No.</th>
-              <th className="p-4 text-left text-black font-medium">Flag</th>
-              <th className="p-4 text-left text-black font-medium">
+            <tr className="bg-amber-400  dark:bg-boxdark">
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
+                No.
+              </th>
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
+                Flag
+              </th>
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
                 Country Name
               </th>
-              <th className="p-4 text-left text-black font-medium">
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
                 Office Address
               </th>
-              <th className="p-4 text-left text-black font-medium">
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
                 Contact Details
               </th>
-              <th className="p-4 text-left text-black font-medium">Action</th>
+              <th className="p-4 text-left text-black font-medium dark:text-white font-inter dark:border-white">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -216,10 +216,11 @@ const ChatInterface = ({ triggerLabel = "Message" }) => {
     <div className="relative">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="rounded-md bg-[#FFB200] px-3 py-1 text-black transition-all hover:bg-black hover:text-white"
+        className="rounded-md bg-[#FFB200] px-3 py-1 text-black transition-all hover:bg-black hover:text-white dark:bg-boxdark dark:text-white dark:border dark:border-white font-inter"
       >
         {triggerLabel}
       </button>
+
       {/* Calling Modal */}
       {isCallingModalOpen && (
         <CallingModal

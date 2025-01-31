@@ -124,7 +124,7 @@ const OnlinePaymentChecking = () => {
       title: "Action",
       render: (record) => (
         <Link
-          className="rounded-md bg-[#FFB200] px-3 py-1 text-[14px] text-black transition-all hover:bg-black hover:text-white hover:shadow-md"
+          className="rounded-md bg-[#FFB200] px-3 py-1 text-[14px] text-black transition-all hover:bg-black hover:text-white hover:shadow-md dark:bg-boxdark dark:text-white dark:border dark:border-white font-inter"
           href={`/c/withdraw/view/payment`}
         >
           View
@@ -155,7 +155,7 @@ const OnlinePaymentChecking = () => {
           <select
             style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
             defaultValue=""
-            className="rounded-lg px-2 py-2 bg-white text-black"
+            className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
           >
             <option value="" disabled selected>
               Currency
@@ -166,7 +166,7 @@ const OnlinePaymentChecking = () => {
           </select>
           <DatePicker
             onChange={onStartDate}
-            className="py-2 bg-white w-35 placeholder:text-black"
+            className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
             placeholder="MM/DD/YYYY"
             suffixIcon={<CalendarIcon />}
             style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -174,7 +174,7 @@ const OnlinePaymentChecking = () => {
           <span className="text-black-4">To</span>
           <DatePicker
             onChange={onEndDate}
-            className="py-2 bg-white w-35 placeholder:text-black"
+            className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
             placeholder="MM/DD/YYYY"
             suffixIcon={<CalendarIcon />}
             style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -183,7 +183,7 @@ const OnlinePaymentChecking = () => {
           <select
             style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
             defaultValue=""
-            className="rounded-lg px-2 py-2 bg-white text-black"
+            className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
           >
             <option value="" disabled selected>
               Status
@@ -208,10 +208,10 @@ const OnlinePaymentChecking = () => {
         className="payment-table"
       />
       <div className="text-center mt-4">
-        <p className="text-md mb-2 text-black font-bold">
+        <p className="text-md mb-2 text-black font-bold ">
           Showing 1 To 5 of 97 Results
         </p>
-        <button className="px-4 py-2 border bg-[#FFB200] rounded-full text-black hover:bg-black hover:text-white transition-colors">
+        <button className="px-4 py-2 border bg-[#FFB200] rounded-full text-black hover:bg-black hover:text-white transition-colors dark:text-white font-inter dark:bg-boxdark">
           More Results
         </button>
       </div>

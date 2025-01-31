@@ -9,7 +9,7 @@ const Date = ({ onStartDate, onEndDate }) => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
         >
           <option value="" disabled selected>
             Currency
@@ -20,7 +20,7 @@ const Date = ({ onStartDate, onEndDate }) => {
         </select>
         <DatePicker
           onChange={onStartDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -28,7 +28,7 @@ const Date = ({ onStartDate, onEndDate }) => {
         <span className="text-black-4">To</span>
         <DatePicker
           onChange={onEndDate}
-          className="py-2 bg-white w-35 placeholder:text-black"
+          className="py-2 bg-white w-35 placeholder:text-black dark:text-white font-inter dark:bg-boxdark"
           placeholder="MM/DD/YYYY"
           suffixIcon={<CalendarIcon />}
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
@@ -37,7 +37,7 @@ const Date = ({ onStartDate, onEndDate }) => {
         <select
           style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
           defaultValue=""
-          className="rounded-lg px-2 py-2 bg-white text-black"
+          className="rounded-lg px-2 py-2 bg-white text-black dark:text-white font-inter dark:bg-boxdark"
         >
           <option value="" disabled selected>
             Status

@@ -1,8 +1,6 @@
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { BiEdit, BiTrash } from "react-icons/bi";
-import Image from "next/image";
-import { FiSave } from "react-icons/fi";
-import Header from "@/components/common/Header";
 import Plan from "./Plan";
 const OfficeAddress: React.FC = () => {
   const FileInputRef = useRef<HTMLInputElement>(null);
@@ -14,7 +12,6 @@ const OfficeAddress: React.FC = () => {
   const [uploadSucces, setUploadSuccess] = useState(false);
   const [uploadedFile, setUploadedFiles] = useState([]);
   const [uploadFilesLogo, setUploadFilesLogo] = useState<any>([]);
-
 
   const handleFileChangeBaner = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
@@ -168,13 +165,11 @@ const OfficeAddress: React.FC = () => {
     <div className="space-y-4">
       <section>
         <div className="mx-auto grid max-w-5xl grid-cols-7 items-center gap-4 rounded-xl p-4">
-          
           <div className="col-span-1"></div>
           <div className="col-span-4">
-          
             <div className="space-y-3">
               <div>
-                <form className="relative text-black m-10 space-y-3 rounded-md border border-slate-100 bg-[#FFFFFF80] p-6 shadow-xl lg:p-10">
+                <form className="relative text-black m-10 space-y-3 rounded-md border border-slate-100 bg-[#FFFFFF80] p-6 shadow-xl lg:p-10 dark:text-white font-inter dark:bg-boxdark">
                   <div>
                     <label className="font-semibold">Address</label>
                     <input
@@ -208,11 +203,10 @@ const OfficeAddress: React.FC = () => {
                     />
                   </div>
 
-
                   <div>
                     <button
                       type="button"
-                      className="mt-5 w-full rounded-md bg-[#ffb200] p-2 text-center font-bold text-black outline-none focus:ring"
+                      className="mt-5 w-full rounded-md border border-black bg-[#ffb200] p-2 text-center font-bold text-black outline-none focus:ring dark:text-white font-inter dark:bg-boxdark dark:border-white"
                     >
                       Submit
                     </button>
@@ -273,12 +267,10 @@ const OfficeAddress: React.FC = () => {
                                   <BiTrash size={30} />
                                 </button>
                               </div>
-                            ),
+                            )
                           )}
                         </div>
                       </div>
-
-                      
                     </div>
                   )}
                 </div>
@@ -331,7 +323,6 @@ const OfficeAddress: React.FC = () => {
                   </div>
                 </div>
 
-                
                 {uploadedFile.length > 0 && (
                   <div className="m-2 flex space-x-3 ">
                     {uploadedFile.map((file, index) => (
@@ -362,8 +353,6 @@ const OfficeAddress: React.FC = () => {
                     ))}
                   </div>
                 )}
-
-                
               </div>
             </div>
           </div>

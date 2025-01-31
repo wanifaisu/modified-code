@@ -120,7 +120,7 @@ const UsersTable = ({ users }: any) => {
               </td>
               <td className="py-3 dark:text-white font-inter">
                 <Link
-                  className="rounded-md bg-[#FFB200] px-3 py-1 text-[14px] text-black transition-all hover:bg-black hover:text-white hover:shadow-md dark:bg-boxdark dark:text-white font-inter dark:border-white"
+                  className="rounded-md bg-[#FFB200] px-3 py-1 text-[14px] text-black transition-all hover:bg-black hover:text-white hover:shadow-md dark:bg-boxdark dark:text-white dark:border dark:border-white font-inter"
                   href={`/c/allUsers/${item._id}/profile`}
                 >
                   View

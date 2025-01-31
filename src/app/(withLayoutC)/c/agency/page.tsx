@@ -90,7 +90,7 @@ const AllUsers = () => {
             <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
               Showing 1 to 5 of 97 results
             </p>
-            <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
+            <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4 dark:bg-boxdark dark:text-white font-inter">
               More Results
             </div>
           </div>

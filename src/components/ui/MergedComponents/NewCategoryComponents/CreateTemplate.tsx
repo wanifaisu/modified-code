@@ -230,7 +230,7 @@ const CreateTemplate = () => {
                 />
                 <button
                   onClick={handleDeleteIconPreview}
-                  className="absolute top-1 right-[2px] bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                  className="absolute top-1 right-[2px] bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center dark:text-white font-inter dark:bg-boxdark"
                 >
                   <BsTrashFill color="red" />
                 </button>
@@ -250,7 +250,7 @@ const CreateTemplate = () => {
 
           {/* Save Button */}
           <Button
-            className={`w-[95px] h-12 bg-[#ffb200]  border border-[#FFB200] text-black rounded-lg px-4 ml-8`}
+            className={`w-[95px] h-12 bg-[#ffb200]  border border-[#FFB200] text-black rounded-lg px-4 ml-8 dark:text-white font-inter dark:bg-boxdark`}
             onClick={handleSaveIconImage}
           >
             Save
@@ -293,7 +293,7 @@ const CreateTemplate = () => {
               placeholder="Name"
               className="px-4 py-2 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-100 w-[200px]"
             />
-            <button className="px-6 bg-slate-700 py-2 bg-navy-900 text-white rounded-md hover:bg-navy-800 transition-colors">
+            <button className="px-6 bg-slate-700 py-2 bg-navy-900 text-white rounded-md hover:bg-navy-800 transition-colors dark:text-white font-inter dark:bg-boxdark">
               Add
             </button>
           </div>
@@ -311,7 +311,7 @@ const CreateTemplate = () => {
         <div className="flex items-center">
           <button
             onClick={() => handleScroll("left")}
-            className="text-gray-500"
+            className="text-gray-500 dark:text-white font-inter dark:bg-boxdark"
           >
             <FaCircleArrowLeft
               size={30}
@@ -321,7 +321,7 @@ const CreateTemplate = () => {
           </button>
           <button
             onClick={() => handleScroll("right")}
-            className="text-black ml-2 "
+            className="text-black ml-2 dark:text-white font-inter dark:bg-boxdark"
           >
             <FaCircleArrowRight
               size={30}
@@ -336,39 +336,39 @@ const CreateTemplate = () => {
         <DateTimeSearch title="Create software" onOpenModal={handleOpenModal} />
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#FFB200] text-black font-semibold">
+            <tr className="bg-[#FFB200] text-black font-semibold dark:text-white font-inter dark:bg-boxdark dark:border-white">
               <th
-                className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 text-center border-r dark:border-white border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 No.
               </th>
               <th
-                className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 dark:border-white text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Photo
               </th>
               <th
-                className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 dark:border-white text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Title
               </th>
               <th
-                className={`max-w-[258px] p-3 border-r border-black border-opacity-50 text-center ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`max-w-[258px] dark:border-white p-3 border-r border-black border-opacity-50 text-center ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Tag
               </th>
               <th
-                className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 dark:border-white text-center border-r border-black border-opacity-50 ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Price
               </th>
               <th
-                className={`p-3 text-center border-r border-black border-opacity-50 whitespace-nowrap ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 dark:border-white text-center border-r border-black border-opacity-50 whitespace-nowrap ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Upload Date
               </th>
               <th
-                className={`p-3 text-center ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000]`}
+                className={`p-3 dark:border-white text-center ${poppins.className} font-semibold text-[15px] leading-[22.5px] text-[#000000] dark:text-white font-inter dark:border-white`}
               >
                 Action
               </th>
@@ -381,9 +381,9 @@ const CreateTemplate = () => {
                   key={index}
                   className={`${
                     index % 2 === 0 ? "bg-[#FAEFD8]" : "bg-[#fff]"
-                  } md:text-base text-sm`}
+                  } md:text-base text-sm dark:text-white font-inter dark:bg-boxdark`}
                 >
-                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                  <td className="p-3 text-center border-r border-black border-opacity-50 dark:border-white">
                     <div className="w-[33.36px] h-[26.1px] bg-[#FFB200] mx-auto">
                       <span
                         className={`${poppins.className} font-bold text-[13.43px] leading-[20.15px] text-[#000000]`}
@@ -392,7 +392,7 @@ const CreateTemplate = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="p-3 text-center mx-auto border-r border-black border-opacity-50">
+                  <td className=" dark:text-white font-inter p-3 text-center mx-auto border-r border-black border-opacity-50 dark:border-white">
                     {row.images && (
                       <Image
                         src={row.images}
@@ -404,26 +404,26 @@ const CreateTemplate = () => {
                     )}
                   </td>
                   <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000]`}
+                    className={`dark:text-white font-inter p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[14.13px] leading-[21.2px] text-[#000000] dark:border-white`}
                   >
                     {row.visible ? row.title : "*****"}
                   </td>
                   <td
-                    className={`max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099]`}
+                    className={` dark:text-white font-inter max-w-[258px] mx-auto p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-medium text-[10px] leading-[15px] text-[#00000099] dark:border-white`}
                   >
                     {row.tag}
                   </td>
                   <td
-                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                    className={`p-3 text-center border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000] dark:text-white font-inter dark:border-white`}
                   >
                     {row.visible ? row.price : "*****"}
                   </td>
                   <td
-                    className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000]`}
+                    className={`p-3 text-center whitespace-nowrap border-r border-black border-opacity-50 ${poppins.className} font-normal text-[14.13px] leading-[21.2px] text-[#000000] dark:text-white font-inter dark:border-white`}
                   >
                     {row.uploadDate}
                   </td>
-                  <td className="p-3 text-center border-r border-black border-opacity-50">
+                  <td className="p-3 text-center border-r border-black border-opacity-50 dark:text-white font-inter dark:border-white">
                     <div className="flex justify-center space-x-2">
                       <button
                         onClick={handleSortRows}
@@ -573,7 +573,7 @@ const CreateTemplate = () => {
         <p className="font-inter font-semibold text-base leading-[19.36px] text-black-4">
           Showing 1 to 5 of 97 results
         </p>
-        <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4">
+        <div className="rounded-[10px] border-[0.89px] border-white bg-[#FFB200] text-[#231F20] font-inter font-semibold text-[13px] leading-[15.73px] py-2 px-4 dark:text-white font-inter dark:bg-boxdark">
           More Results
         </div>
       </div>

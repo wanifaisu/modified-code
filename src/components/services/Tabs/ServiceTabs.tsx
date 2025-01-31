@@ -69,7 +69,7 @@ const ServiceTab = () => {
                 currentTab === "logo"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("logo")}
             >
               Banner
@@ -79,7 +79,7 @@ const ServiceTab = () => {
                 currentTab === "threeCard"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("threeCard")}
             >
               3 Card
@@ -90,7 +90,7 @@ const ServiceTab = () => {
                 currentTab === "fourCard"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("fourCard")}
             >
               4 Card
@@ -101,7 +101,7 @@ const ServiceTab = () => {
                 currentTab === "security"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("security")}
             >
               Security
@@ -112,7 +112,7 @@ const ServiceTab = () => {
                 currentTab === "photoVideo"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("photoVideo")}
             >
               Service Gallery
@@ -123,7 +123,7 @@ const ServiceTab = () => {
                 currentTab === "paymentIcon"
                   ? "bg-[#ffb200] text-black-4"
                   : "bg-white text-[#00000080]"
-              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none`}
+              } rounded-[10px] shadow-lg px-3 py-4 text-sm text-black border-[0.5px] border-[#00000080] font-semibold whitespace-nowrap hover:bg-[#ffb200] hover:border-none dark:text-white font-inter dark:bg-boxdark`}
               onClick={() => handleTabChange("paymentIcon")}
             >
               Support Icon & Support Logo

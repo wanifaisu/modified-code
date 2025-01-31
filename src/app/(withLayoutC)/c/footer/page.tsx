@@ -25,7 +25,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab1" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm whitespace-nowrap text-black font-semibold hover:bg[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm whitespace-nowrap text-black font-semibold hover:bg[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab1")}
           >
             Office Address
@@ -34,7 +34,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab2" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab2")}
           >
             Global Location
@@ -43,7 +43,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab3" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab3")}
           >
             Contact Us
@@ -52,7 +52,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab4" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black whitespace-nowrap font-semibold hover:bg[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab4")}
           >
             Subscribes
@@ -61,7 +61,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "company" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg[#ffb200] whitespace-nowrap`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg[#ffb200] whitespace-nowrap dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("company")}
           >
             Company
@@ -70,7 +70,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab7" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] whitespace-nowrap`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] whitespace-nowrap dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab7")}
           >
             Best IT & Business Solution
@@ -78,7 +78,7 @@ const CompanyTabPage = () => {
           <button
             className={`${
               currentTab === "tab8" ? "bg-[#ffb200] text-black" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] whitespace-nowrap`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] whitespace-nowrap dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab8")}
           >
             Hiring

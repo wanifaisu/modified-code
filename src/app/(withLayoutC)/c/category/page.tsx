@@ -24,7 +24,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab1" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab1")}
           >
             Create Software
@@ -32,7 +32,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab2" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab2")}
           >
             Create Real Estate
@@ -40,7 +40,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab3" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab3")}
           >
             Create Service
@@ -48,7 +48,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab4" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab4")}
           >
             Create Notice
@@ -56,7 +56,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab5" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab5")}
           >
             Create Order
@@ -64,7 +64,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab6" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab6")}
           >
             Create Employee
@@ -72,7 +72,7 @@ const NewCategory: React.FC = () => {
           <button
             className={`${
               currentTab === "tab7" ? "bg-[#FFB200]" : "bg-white"
-            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200]`}
+            } rounded-lg shadow-lg border-[#ffb200] px-4 py-2 text-sm text-black font-semibold hover:bg-[#ffb200] dark:text-white font-inter dark:bg-boxdark`}
             onClick={() => handleTabChange("tab7")}
           >
             Create Blog
